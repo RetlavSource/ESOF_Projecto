@@ -23,7 +23,7 @@ Desktop.ini
 ######################
 # UML
 ######################
-*.zargo~
+Diagramas_UML/*.zargo~
 
 ######################
 # Intellij
