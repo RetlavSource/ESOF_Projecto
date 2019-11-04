@@ -1,48 +1,31 @@
-######################
-# Visual Studio Code
-######################
-.vscode/
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-# Folder config file
-Desktop.ini
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-######################
-# Mac OSX
-######################
-.DS_Store
-.svn
-
-# Thumbnails
-._*
-
-######################
-# Logs
-######################
-*.log
-
-######################
-# UML
-######################
-Diagramas_UML/*.zargo~
-
-######################
-# Intellij
-######################
-.idea/
-*.iml
+### IntelliJ IDEA ###
+.idea
 *.iws
+*.iml
 *.ipr
-*.ids
-*.orig
 
-######################
-# Maven
-######################
-/log/
-/target/
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
 
-######################
-# Gradle
-######################
-.gradle/
-/build/
+### VS Code ###
+.vscode/
