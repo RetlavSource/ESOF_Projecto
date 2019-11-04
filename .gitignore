@@ -1,4 +1,5 @@
 HELP.md
+log/
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
@@ -14,10 +15,12 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
+*.ids
+*.orig
 
 ### NetBeans ###
 /nbproject/private/
@@ -29,3 +32,23 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Folder config file ###
+Desktop.ini
+
+### Mac OSX ###
+.DS_Store
+.svn
+
+### Thumbnails ###
+._*
+
+### Logs ###
+*.log
+
+### UML ###
+Diagramas_UML/*.zargo~
+
+### Gradle ###
+.gradle/
+/build/
