@@ -1,24 +1,13 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
 
-import java.util.Vector;
-import String;
+import java.util.Set;
 
 public class Cadeira {
 
-  public String nome;
+  private String nome;
+  private String lingua;
 
-  public String lingua;
-
-    public Curso cursos;
-    /**
-   * 
-   * @element-type Explicador
-   */
-  public Vector  explicadores;
-    /**
-   * 
-   * @element-type Atendimento
-   */
-  public Vector  atendimentos;
-
+  private Curso curso;
+  private Set<Explicador> explicadores;
+  private Set<Atendimento> atendimentos;
 }

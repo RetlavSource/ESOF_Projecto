@@ -1,11 +1,12 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
+
+import java.time.LocalDateTime;
 
 public class Atendimento {
 
-  public LocalDateTime data;
+  private LocalDateTime data;
 
-    public Explicador explicador;
-    public Aluno aluno;
-    public Cadeira cadeira;
-
+  private Explicador explicador;
+  private Aluno aluno;
+  private Cadeira cadeira;
 }

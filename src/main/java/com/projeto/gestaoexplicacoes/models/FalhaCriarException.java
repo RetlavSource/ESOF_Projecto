@@ -1,4 +1,4 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
 
 public class FalhaCriarException {
 }

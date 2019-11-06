@@ -1,10 +1,6 @@
-package gestao_explicacoes;
-
-import String;
+package com.projeto.gestaoexplicacoes.models;
 
 public class Idioma {
 
-  public String nome;
-
-  
+  private String nome;
 }

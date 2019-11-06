@@ -1,16 +1,10 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
 
-import java.util.Vector;
-import String;
+import java.util.Set;
 
 public class Faculdade {
 
-  public String nome;
+  private String nome;
 
-    /**
-   * 
-   * @element-type Curso
-   */
-  public Vector  cursos;
-
+  private Set<Curso> cursos;
 }

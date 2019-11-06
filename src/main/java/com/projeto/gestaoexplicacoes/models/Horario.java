@@ -1,12 +1,11 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
+
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 public class Horario {
 
-  public DayOfWeek diaSemana;
-
-  public LocalTime horaInicio;
-
-  public LocalTime horaFim;
-
-  
+  private DayOfWeek diaSemana;
+  private LocalTime horaInicio;
+  private LocalTime horaFim;
 }

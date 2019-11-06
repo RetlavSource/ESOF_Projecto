@@ -1,19 +1,13 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
 
-import java.util.Vector;
-import String;
+import java.time.LocalDate;
+import java.util.Set;
 
 public class Aluno {
 
-  public String nome;
+  private String nome;
+  private LocalDate dataNascimento;
 
-  public LocalDate dataNascimento;
-
-    /**
-   * 
-   * @element-type Atendimento
-   */
-  public Vector  atendimentos;
-    public Curso cursos;
-
+  private Curso curso;
+  private Set<Atendimento> atendimentos;
 }

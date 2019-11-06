@@ -1,33 +1,15 @@
-package gestao_explicacoes;
+package com.projeto.gestaoexplicacoes.models;
 
-import java.util.Vector;
-import String;
+import java.time.LocalDate;
+import java.util.Set;
 
 public class Explicador {
 
-  public String nome;
+  private String nome;
+  private LocalDate dataNascimento;
 
-  public LocalDate dataNascimento;
-
-    /**
-   * 
-   * @element-type Horario
-   */
-  public Vector  horarios;
-    /**
-   * 
-   * @element-type Atendimento
-   */
-  public Vector  atendimentos;
-    /**
-   * 
-   * @element-type Cadeira
-   */
-  public Vector  cadeiras;
-    /**
-   * 
-   * @element-type Idioma
-   */
-  public Vector  idiomas;
-
+  private Set<Horario> horarios;
+  private Set<Atendimento> atendimentos;
+  private Set<Cadeira> cadeiras;
+  private Set<Idioma> idiomas;
 }
