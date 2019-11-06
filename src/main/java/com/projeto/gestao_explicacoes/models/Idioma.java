@@ -1,4 +1,4 @@
-package com.projeto.gestaoexplicacoes.models;
+package com.projeto.gestao_explicacoes.models;
 
 public class Idioma {
 

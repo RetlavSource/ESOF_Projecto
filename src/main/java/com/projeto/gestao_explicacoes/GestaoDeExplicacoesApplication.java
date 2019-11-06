@@ -1,4 +1,4 @@
-package com.projeto.gestaoexplicacoes;
+package com.projeto.gestao_explicacoes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
