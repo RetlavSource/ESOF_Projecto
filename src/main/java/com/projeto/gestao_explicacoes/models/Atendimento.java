@@ -18,8 +18,10 @@ public class Atendimento {
 
   @ManyToOne
   private Explicador explicador;
+
   @ManyToOne
   private Aluno aluno;
+
   @ManyToOne
   private Cadeira cadeira;
 }

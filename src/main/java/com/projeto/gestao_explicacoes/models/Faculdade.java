@@ -17,6 +17,6 @@ public class Faculdade {
   private Long id;
   private String nome;
 
-  @OneToMany
+  @OneToMany(mappedBy = "faculdade")
   private Set<Curso> cursos = new HashSet<>();
 }

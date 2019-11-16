@@ -21,6 +21,7 @@ public class Aluno {
 
   @ManyToOne
   private Curso curso;
-  @OneToMany
+
+  @OneToMany(mappedBy = "aluno")
   private Set<Atendimento> atendimentos = new HashSet<>();
 }
