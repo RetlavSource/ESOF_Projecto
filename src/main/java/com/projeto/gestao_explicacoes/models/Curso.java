@@ -19,8 +19,10 @@ public class Curso {
 
   @ManyToOne
   private Faculdade faculdade;
-  @OneToMany
+
+  @OneToMany(mappedBy = "curso")
   private Set<Cadeira> cadeiras = new HashSet<>();
-  @OneToMany
+
+  @OneToMany(mappedBy = "curso")
   private Set<Aluno>  alunos = new HashSet<>();
 }

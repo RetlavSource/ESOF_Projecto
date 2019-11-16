@@ -20,8 +20,10 @@ public class Cadeira {
 
   @ManyToOne
   private Curso curso;
-  @ManyToMany
+
+  @ManyToMany(mappedBy = "cadeiras")
   private Set<Explicador> explicadores = new HashSet<>();
-  @OneToMany
+
+  @OneToMany(mappedBy = "cadeira")
   private Set<Atendimento> atendimentos = new HashSet<>();
 }
