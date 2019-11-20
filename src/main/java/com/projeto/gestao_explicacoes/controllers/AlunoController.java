@@ -17,19 +17,19 @@ public class AlunoController {
 
     //@RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<Aluno>> getAllClients(){
+    public ResponseEntity<Iterable<Aluno>> getAllAlunos(){
 
         return ResponseEntity.ok(this.alunoRepo.findAll());
     }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Aluno> getClientById(@PathVariable Long id){
+    public ResponseEntity<Aluno> getAlunoById(@PathVariable Long id){
 
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping(value = "",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Aluno> createClient(@RequestBody Aluno aluno){
+    public ResponseEntity<Aluno> createAluno(@RequestBody Aluno aluno){
 
         System.out.println(aluno);
 
