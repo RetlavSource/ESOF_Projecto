@@ -21,4 +21,12 @@ public class Horario {
   private DayOfWeek diaSemana;
   private LocalTime horaInicio;
   private LocalTime horaFim;
+
+  // ****** METHODS ******
+
+  public Horario(DayOfWeek diaSemana, LocalTime horaInicio, LocalTime horaFim) {
+    this.diaSemana = diaSemana;
+    this.horaInicio = horaInicio;
+    this.horaFim = horaFim;
+  }
 }

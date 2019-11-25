@@ -1,14 +1,12 @@
 package com.projeto.gestao_explicacoes.models;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@NoArgsConstructor
 public class Atendimento {
 
   @Id
@@ -17,11 +15,25 @@ public class Atendimento {
   private LocalDateTime data;
 
   @ManyToOne
-  private Explicador explicador;
+  private Explicador explicador; // adicionado em "Explicador"
 
   @ManyToOne
-  private Aluno aluno;
+  private Aluno aluno; // adicionado em "Aluno"
 
   @ManyToOne
-  private Cadeira cadeira;
+  private Cadeira cadeira; // adicionado em "Cadeira"
+
+  // ****** METHODS ******
+
+
+  public Atendimento() {
+    this.data = LocalDateTime.now();
+  }
+
+  public Atendimento(Explicador explicador, Aluno aluno, Cadeira cadeira) {
+    this();
+    this.explicador = explicador;
+    this.aluno = aluno;
+    this.cadeira = cadeira;
+  }
 }

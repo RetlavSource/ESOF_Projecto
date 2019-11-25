@@ -21,8 +21,21 @@ public class Aluno {
   private LocalDate dataNascimento;
 
   @ManyToOne
-  private Curso curso;
+  private Curso curso; // adicionado em "Curso"
 
   @OneToMany(mappedBy = "aluno")
   private Set<Atendimento> atendimentos = new HashSet<>();
+
+  // ****** METHODS ******
+
+  public Aluno(String nome, Integer numero, LocalDate dataNascimento) {
+    this.nome = nome;
+    this.numero = numero;
+    this.dataNascimento = dataNascimento;
+  }
+
+  public void addAtendimento(Atendimento atendimento){
+    this.atendimentos.add(atendimento);
+    atendimento.setAluno(this);
+  }
 }

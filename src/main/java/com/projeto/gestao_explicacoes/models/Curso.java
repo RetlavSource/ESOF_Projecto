@@ -18,11 +18,28 @@ public class Curso {
   private String nome;
 
   @ManyToOne
-  private Faculdade faculdade;
+  private Faculdade faculdade; // adicionado em "Faculdade"
 
   @OneToMany(mappedBy = "curso")
   private Set<Cadeira> cadeiras = new HashSet<>();
 
   @OneToMany(mappedBy = "curso")
   private Set<Aluno>  alunos = new HashSet<>();
+
+  // ****** METHODS ******
+
+  public Curso(String nome) {
+    this.nome = nome;
+  }
+
+  public void addCadeira(Cadeira cadeira){
+    this.cadeiras.add(cadeira);
+    cadeira.setCurso(this);
+  }
+
+  public void addAluno(Aluno aluno){
+    this.alunos.add(aluno);
+    aluno.setCurso(this);
+  }
+
 }

@@ -32,5 +32,25 @@ public class Explicador {
 
   @ManyToMany
   @JoinTable(name = "explicador_cadeira", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "cadeira_id"))
-  private Set<Cadeira> cadeiras = new HashSet<>();
+  private Set<Cadeira> cadeiras = new HashSet<>(); // adicionado em "Cadeira"
+
+  // ****** METHODS ******
+
+  public Explicador(String nome, LocalDate dataNascimento) {
+    this.nome = nome;
+    this.dataNascimento = dataNascimento;
+  }
+
+  public void addHorario(Horario horario){
+    this.horarios.add(horario);
+  }
+
+  public void addIdioma(Idioma idioma){
+    this.idiomas.add(idioma);
+  }
+
+  public void addAtendimento(Atendimento atendimento){
+    this.atendimentos.add(atendimento);
+    atendimento.setExplicador(this);
+  }
 }

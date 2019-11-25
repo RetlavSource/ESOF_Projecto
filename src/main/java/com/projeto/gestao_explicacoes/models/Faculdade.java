@@ -19,4 +19,15 @@ public class Faculdade {
 
   @OneToMany(mappedBy = "faculdade")
   private Set<Curso> cursos = new HashSet<>();
+
+  // ****** METHODS ******
+
+  public Faculdade(String nome) {
+    this.nome = nome;
+  }
+
+  public void addCurso(Curso curso){
+    this.cursos.add(curso);
+    curso.setFaculdade(this);
+  }
 }
