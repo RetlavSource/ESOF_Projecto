@@ -17,6 +17,7 @@ public class Aluno {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String nome;
+  private Integer numero;
   private LocalDate dataNascimento;
 
   @ManyToOne
