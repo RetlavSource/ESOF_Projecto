@@ -19,20 +19,17 @@ public class Explicador {
   private String nome;
   private LocalDate dataNascimento;
 
-  @OneToMany
-  @JoinTable(name = "explicador_horario", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "horario_id"))
-  private Set<Horario> horarios = new HashSet<>();
+  @OneToMany(mappedBy = "explicador")
+  private Set<Horario> horario = new HashSet<>();
 
   @OneToMany
-  @JoinTable(name = "explicador_idioma", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "idioma_id"))
-  private Set<Idioma> idiomas = new HashSet<>();
+  private Set<Idioma> idiomas = new HashSet<>(); // tabela criada automaticamente
 
   @OneToMany(mappedBy = "explicador")
   private Set<Atendimento> atendimentos = new HashSet<>();
 
-  @ManyToMany
-  @JoinTable(name = "explicador_cadeira", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "cadeira_id"))
-  private Set<Cadeira> cadeiras = new HashSet<>(); // adicionado em "Cadeira"
+  @ManyToMany(mappedBy = "explicadores")
+  private Set<Cadeira> cadeiras = new HashSet<>();
 
   // ****** METHODS ******
 
@@ -42,7 +39,8 @@ public class Explicador {
   }
 
   public void addHorario(Horario horario){
-    this.horarios.add(horario);
+    this.horario.add(horario);
+    horario.setExplicador(this);
   }
 
   public void addIdioma(Idioma idioma){
@@ -52,5 +50,10 @@ public class Explicador {
   public void addAtendimento(Atendimento atendimento){
     this.atendimentos.add(atendimento);
     atendimento.setExplicador(this);
+  }
+
+  public void addCadeira(Cadeira cadeira) {
+    this.cadeiras.add(cadeira);
+    cadeira.getExplicadores().add(this);
   }
 }

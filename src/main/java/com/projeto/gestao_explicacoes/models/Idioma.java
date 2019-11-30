@@ -17,10 +17,12 @@ public class Idioma {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String nome; // Nome do idioma em UpperCase
+  private String sigla; // Sigla em UpperCase
 
   // ****** METHODS ******
 
-  public Idioma(String nome) {
+  public Idioma(String nome, String sigla) {
     this.nome = nome.toUpperCase();
+    this.sigla = sigla.toUpperCase();
   }
 }

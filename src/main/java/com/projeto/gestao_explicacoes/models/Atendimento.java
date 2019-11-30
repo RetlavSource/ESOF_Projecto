@@ -23,6 +23,9 @@ public class Atendimento {
   @ManyToOne
   private Cadeira cadeira; // adicionado em "Cadeira"
 
+  @OneToOne
+  private Idioma idioma; // ligação unidireccional
+
   // ****** METHODS ******
 
 
@@ -30,10 +33,11 @@ public class Atendimento {
     this.data = LocalDateTime.now();
   }
 
-  public Atendimento(Explicador explicador, Aluno aluno, Cadeira cadeira) {
+  public Atendimento(Explicador explicador, Aluno aluno, Cadeira cadeira, Idioma idioma) {
     this();
     this.explicador = explicador;
     this.aluno = aluno;
     this.cadeira = cadeira;
+    this.idioma = idioma;
   }
 }

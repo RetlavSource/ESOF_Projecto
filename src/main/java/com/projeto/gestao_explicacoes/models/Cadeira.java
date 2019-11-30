@@ -16,27 +16,22 @@ public class Cadeira {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String nome;
-  private String lingua;
+  private String sigla;
 
   @ManyToOne
   private Curso curso; // adicionado em "Curso"
 
-  @ManyToMany(mappedBy = "cadeiras")
-  private Set<Explicador> explicadores = new HashSet<>();
+  @ManyToMany
+  private Set<Explicador> explicadores = new HashSet<>(); // adicionado em "Explicador"
 
   @OneToMany(mappedBy = "cadeira")
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   // ****** METHODS ******
 
-  public Cadeira(String nome, String lingua) {
+  public Cadeira(String nome, String sigla) {
     this.nome = nome;
-    this.lingua = lingua;
-  }
-
-  public void addExplicador(Explicador explicador){
-    this.explicadores.add(explicador);
-    explicador.getCadeiras().add(this);
+    this.sigla = sigla;
   }
 
   public void addAtendimento(Atendimento atendimento){

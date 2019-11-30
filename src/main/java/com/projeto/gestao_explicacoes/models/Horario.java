@@ -3,10 +3,7 @@ package com.projeto.gestao_explicacoes.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
@@ -22,11 +19,21 @@ public class Horario {
   private LocalTime horaInicio;
   private LocalTime horaFim;
 
+  @ManyToOne
+  private Explicador explicador; // adicionado em "Explicador"
+
   // ****** METHODS ******
 
   public Horario(DayOfWeek diaSemana, LocalTime horaInicio, LocalTime horaFim) {
     this.diaSemana = diaSemana;
     this.horaInicio = horaInicio;
     this.horaFim = horaFim;
+  }
+
+  public Horario(DayOfWeek diaSemana, LocalTime horaInicio, LocalTime horaFim, Explicador explicador) {
+    this.diaSemana = diaSemana;
+    this.horaInicio = horaInicio;
+    this.horaFim = horaFim;
+    this.explicador = explicador;
   }
 }
