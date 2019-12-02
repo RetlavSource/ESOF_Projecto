@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,6 @@ public class Aluno {
   private Long id;
   private String nome;
   private Integer numero;
-  private LocalDate dataNascimento;
 
   @ManyToOne
   private Curso curso; // adicionado em "Curso"
@@ -28,10 +26,9 @@ public class Aluno {
 
   // ****** METHODS ******
 
-  public Aluno(String nome, Integer numero, LocalDate dataNascimento) {
+  public Aluno(String nome, Integer numero) {
     this.nome = nome;
     this.numero = numero;
-    this.dataNascimento = dataNascimento;
   }
 
   public void addAtendimento(Atendimento atendimento){

@@ -12,6 +12,5 @@ public interface AlunoRepo extends CrudRepository<Aluno,Long> {
 
     Optional<Aluno> findByNome(String nome);
     Optional<Aluno> findByNumero(Integer numero);
-    Optional<Aluno> findByDataNascimento(LocalDate dataNascimento);
 
 }
