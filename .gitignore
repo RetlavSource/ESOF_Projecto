@@ -51,3 +51,6 @@ Diagramas_UML/*.zargo~
 ### Gradle ###
 .gradle/
 /build/
+
+### ESOF presentation ###
+Apresentacao_ESOF/
