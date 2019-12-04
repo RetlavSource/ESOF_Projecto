@@ -1,7 +1,9 @@
 package com.projeto.gestao_explicacoes.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,6 +20,8 @@ public class Curso {
   private String nome;
 
   @ManyToOne
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
   private Faculdade faculdade; // adicionado em "Faculdade"
 
   @OneToMany(mappedBy = "curso")
