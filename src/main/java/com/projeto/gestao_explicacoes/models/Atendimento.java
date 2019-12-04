@@ -1,17 +1,16 @@
 package com.projeto.gestao_explicacoes.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Atendimento {
+public class Atendimento extends BaseModel{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private LocalDateTime data;
 
   @ManyToOne

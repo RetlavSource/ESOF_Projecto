@@ -1,20 +1,19 @@
 package com.projeto.gestao_explicacoes.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @NoArgsConstructor
-public class Horario {
+public class Horario extends BaseModel{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private DayOfWeek diaSemana;
   private LocalTime horaInicio;
   private LocalTime horaFim;
