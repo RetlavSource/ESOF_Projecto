@@ -3,7 +3,6 @@ package com.projeto.gestao_explicacoes;
 import com.projeto.gestao_explicacoes.models.Cadeira;
 import com.projeto.gestao_explicacoes.models.Curso;
 import com.projeto.gestao_explicacoes.models.Faculdade;
-import com.projeto.gestao_explicacoes.repositories.AlunoRepo;
 import com.projeto.gestao_explicacoes.repositories.CadeiraRepo;
 import com.projeto.gestao_explicacoes.repositories.CursoRepo;
 import com.projeto.gestao_explicacoes.repositories.FaculdadeRepo;
