@@ -1,8 +1,10 @@
 package com.projeto.gestao_explicacoes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class Cadeira extends BaseModel{
   private String sigla;
 
   @ManyToOne
+  @JsonBackReference
   private Curso curso; // adicionado em "Curso"
 
   @ManyToMany
@@ -31,6 +34,12 @@ public class Cadeira extends BaseModel{
   public Cadeira(String nome, String sigla) {
     this.nome = nome;
     this.sigla = sigla;
+  }
+
+  public Cadeira(String nome, String sigla, @NotNull Curso curso) {
+    this(nome, sigla);
+    this.curso = curso;
+    curso.addCadeira(this);
   }
 
   public void addAtendimento(Atendimento atendimento){

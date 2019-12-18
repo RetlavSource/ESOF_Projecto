@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Aluno extends BaseModel{
   private Integer numero;
 
   @ManyToOne
+  @JsonBackReference
   private Curso curso; // adicionado em "Curso"
 
   @OneToMany(mappedBy = "aluno")

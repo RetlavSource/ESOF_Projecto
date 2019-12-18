@@ -1,7 +1,7 @@
 package com.projeto.gestao_explicacoes.controllers;
 
 import com.projeto.gestao_explicacoes.models.Aluno;
-import com.projeto.gestao_explicacoes.repositories.AlunoRepo;
+import com.projeto.gestao_explicacoes.services.AlunoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,29 +12,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/aluno")
 public class AlunoController {
 
     private Logger logger= LoggerFactory.getLogger(this.getClass());
+    
+    private AlunoService alunoService;
 
     @Autowired
-    private AlunoRepo alunoRepo;
+    public AlunoController(AlunoService alunoService) {
+        this.alunoService = alunoService;
+    }
 
     //@RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<Aluno>> getAllAlunos(){
+    public ResponseEntity<Set<Aluno>> getAllAlunos(){
         this.logger.info("Recebido um pedido GET");
 
-        return ResponseEntity.ok(this.alunoRepo.findAll());
+        return ResponseEntity.ok(this.alunoService.findAll());
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Aluno> getAlunoById(@PathVariable("id") Long id){
         this.logger.info("Recebido um pedido GET");
 
-        Optional<Aluno> optionalAluno = this.alunoRepo.findById(id);
+        Optional<Aluno> optionalAluno = this.alunoService.findById(id);
         if (optionalAluno.isPresent()){
             return ResponseEntity.ok(optionalAluno.get());
         }
@@ -46,14 +51,12 @@ public class AlunoController {
     public ResponseEntity<Aluno> createAluno(@RequestBody Aluno aluno){
         this.logger.info("Recebido um pedido POST");
 
-        // O mesmo que é feito no método "getAlunosById", mas mais compacto
-        if (this.alunoRepo.findByNumero(aluno.getNumero()).isPresent()){
-            //return ResponseEntity.badRequest().build();
+        Optional<Aluno> criadoAluno = this.alunoService.criarAluno(aluno);
+        
+        if (criadoAluno.isEmpty()){
             throw new AlunoAlreadyExistsException(aluno.getNome());
         }
-        //System.out.println(aluno);
-        //return ResponseEntity.ok().build();
-        return ResponseEntity.ok(this.alunoRepo.save(aluno));
+        return ResponseEntity.ok(criadoAluno.get());
     }
 
 

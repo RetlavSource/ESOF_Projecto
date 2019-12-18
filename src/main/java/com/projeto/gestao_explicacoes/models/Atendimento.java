@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
+@AllArgsConstructor
 public class Atendimento extends BaseModel{
 
   private LocalDateTime data;

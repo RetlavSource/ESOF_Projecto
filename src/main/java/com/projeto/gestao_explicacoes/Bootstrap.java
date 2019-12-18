@@ -1,8 +1,10 @@
 package com.projeto.gestao_explicacoes;
 
+import com.projeto.gestao_explicacoes.models.Cadeira;
 import com.projeto.gestao_explicacoes.models.Curso;
 import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.repositories.AlunoRepo;
+import com.projeto.gestao_explicacoes.repositories.CadeiraRepo;
 import com.projeto.gestao_explicacoes.repositories.CursoRepo;
 import com.projeto.gestao_explicacoes.repositories.FaculdadeRepo;
 import org.slf4j.Logger;
@@ -20,17 +22,18 @@ import java.time.*;
 @Transactional
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
-    private AlunoRepo alunoRepo; // enunciar os repositorios a utilizar
-
-    @Autowired
-    private FaculdadeRepo faculdadeRepo;
-
-    @Autowired
-    private CursoRepo cursoRepo;
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private FaculdadeRepo faculdadeRepo;
+    private CursoRepo cursoRepo;
+    private CadeiraRepo cadeiraRepo;
+
+    @Autowired
+    public Bootstrap(FaculdadeRepo faculdadeRepo, CursoRepo cursoRepo, CadeiraRepo cadeiraRepo) {
+        this.faculdadeRepo = faculdadeRepo;
+        this.cursoRepo = cursoRepo;
+        this.cadeiraRepo = cadeiraRepo;
+    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -64,24 +67,28 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         this.faculdadeRepo.save(faculdade2);
         this.faculdadeRepo.save(faculdade3);
 
-        Curso engInfor = new Curso("Engenharia Informática");
-        Curso engCivil = new Curso("Engenharia Civil");
-        Curso arq = new Curso("Arquitectura");
-        Curso psico = new Curso("Psicologia");
-        Curso fisio = new Curso("Fisioterapia");
+//        Curso engInformatica = new Curso("Engenharia Informática");
+//        faculdade1.addCurso(engInformatica);
+        Curso engInformatica = new Curso("Engenharia Informática", faculdade1);
 
-        faculdade1.addCurso(engInfor);
-        faculdade1.addCurso(engCivil);
-        faculdade1.addCurso(arq);
-        faculdade2.addCurso(psico);
-        faculdade3.addCurso(fisio);
+//        Curso engCivil = new Curso("Engenharia Civil");
+//        faculdade1.addCurso(engCivil);
+        Curso engCivil = new Curso("Engenharia Civil", faculdade1);
 
-        this.cursoRepo.save(engInfor);
+//        Curso psicologia = new Curso("Psicologia");
+//        faculdade2.addCurso(psicologia);
+        Curso psicologia = new Curso("Psicologia", faculdade2);
+
+//        Curso fisioterapia = new Curso("Fisioterapia");
+//        faculdade3.addCurso(fisioterapia);
+        Curso fisioterapia = new Curso("Fisioterapia", faculdade3);
+
+        this.cursoRepo.save(engInformatica);
         this.cursoRepo.save(engCivil);
-        this.cursoRepo.save(arq);
-        this.cursoRepo.save(psico);
-        this.cursoRepo.save(fisio);
+        this.cursoRepo.save(psicologia);
+        this.cursoRepo.save(fisioterapia);
 
+        Cadeira alg1 = new Cadeira("Algoritmos e estruturas de Dados I", "ALG1", engInformatica);
 
 
 
