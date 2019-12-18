@@ -21,6 +21,7 @@ public class Cadeira extends BaseModel{
 
   @ManyToOne
   @JsonBackReference
+  @EqualsAndHashCode.Exclude
   private Curso curso; // adicionado em "Curso"
 
   @ManyToMany
