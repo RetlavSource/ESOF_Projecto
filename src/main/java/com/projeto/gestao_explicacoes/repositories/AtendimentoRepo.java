@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface AtendimentoRepo extends CrudRepository<Atendimento, Long> {
 
     Optional<Atendimento> findByAluno(Aluno aluno);
-    Optional<Atendimento> findByAluno_Nome(String nome);
-    Optional<Atendimento> findByAluno_Numero(Integer numero);
+    Optional<Atendimento> findByAlunoNome(String nome);
+    Optional<Atendimento> findByAlunoNumero(Integer numero);
 
 }

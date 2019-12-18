@@ -15,10 +15,10 @@ public class Atendimento extends BaseModel{
 
   private LocalDateTime data;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private Explicador explicador; // adicionado em "Explicador"
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private Aluno aluno; // adicionado em "Aluno"
 
   @ManyToOne
