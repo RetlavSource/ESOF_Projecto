@@ -1,12 +1,15 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,13 +23,19 @@ public class Cadeira extends BaseModel{
   private String sigla;
 
   @ManyToOne
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
   @JsonBackReference
   private Curso curso; // adicionado em "Curso"
 
   @ManyToMany
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
   private Set<Explicador> explicadores = new HashSet<>(); // adicionado em "Explicador"
 
   @OneToMany(mappedBy = "cadeira")
+  @JsonManagedReference
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   // ****** METHODS ******
@@ -36,14 +45,19 @@ public class Cadeira extends BaseModel{
     this.sigla = sigla;
   }
 
-  public Cadeira(String nome, String sigla, @NotNull Curso curso) {
-    this(nome, sigla);
-    this.curso = curso;
-    curso.addCadeira(this);
-  }
-
   public void addAtendimento(Atendimento atendimento){
     this.atendimentos.add(atendimento);
     atendimento.setCadeira(this);
+  }
+
+  @ToString.Include
+  public ArrayList<String> explicadores() {
+    ArrayList<String> nomeExplicadores = new ArrayList<>();
+
+    for (Explicador explicador : this.explicadores) {
+      nomeExplicadores.add(explicador.getNome());
+    }
+
+    return nomeExplicadores;
   }
 }

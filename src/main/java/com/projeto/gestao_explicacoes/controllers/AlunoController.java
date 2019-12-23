@@ -3,7 +3,7 @@ package com.projeto.gestao_explicacoes.controllers;
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.exceptions.FalhaPesquisaException;
 import com.projeto.gestao_explicacoes.models.Aluno;
-import com.projeto.gestao_explicacoes.services.AlunoService;
+import com.projeto.gestao_explicacoes.services.alunoServices.AlunoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
