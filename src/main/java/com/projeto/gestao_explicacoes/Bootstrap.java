@@ -66,28 +66,25 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         this.faculdadeRepo.save(faculdade2);
         this.faculdadeRepo.save(faculdade3);
 
-//        Curso engInformatica = new Curso("Engenharia Informática");
-//        faculdade1.addCurso(engInformatica);
-        Curso engInformatica = new Curso("Engenharia Informática", faculdade1);
+        Curso engInformatica = new Curso("Engenharia Informática");
+        faculdade1.addCurso(engInformatica);
 
-//        Curso engCivil = new Curso("Engenharia Civil");
-//        faculdade1.addCurso(engCivil);
-        Curso engCivil = new Curso("Engenharia Civil", faculdade1);
+        Curso engCivil = new Curso("Engenharia Civil");
+        faculdade1.addCurso(engCivil);
 
-//        Curso psicologia = new Curso("Psicologia");
-//        faculdade2.addCurso(psicologia);
-        Curso psicologia = new Curso("Psicologia", faculdade2);
+        Curso psicologia = new Curso("Psicologia");
+        faculdade2.addCurso(psicologia);
 
-//        Curso fisioterapia = new Curso("Fisioterapia");
-//        faculdade3.addCurso(fisioterapia);
-        Curso fisioterapia = new Curso("Fisioterapia", faculdade3);
+        Curso fisioterapia = new Curso("Fisioterapia");
+        faculdade3.addCurso(fisioterapia);
 
         this.cursoRepo.save(engInformatica);
         this.cursoRepo.save(engCivil);
         this.cursoRepo.save(psicologia);
         this.cursoRepo.save(fisioterapia);
 
-        Cadeira alg1 = new Cadeira("Algoritmos e estruturas de Dados I", "ALG1", engInformatica);
+        Cadeira alg1 = new Cadeira("Algoritmos e estruturas de Dados I", "ALG1");
+        engInformatica.addCadeira(alg1);
 
 
 

@@ -40,13 +40,6 @@ public class Curso extends BaseModel{
     this.nome = nome;
   }
 
-  public Curso(String nome, @NotNull Faculdade faculdade){
-    this(nome);
-    this.faculdade = faculdade;
-    faculdade.addCurso(this);
-  }
-
-
   public void addCadeira(Cadeira cadeira){
     this.cadeiras.add(cadeira);
     cadeira.setCurso(this);

@@ -1,8 +1,10 @@
 package com.projeto.gestao_explicacoes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,15 +18,21 @@ public class Atendimento extends BaseModel{
   private LocalDateTime data;
 
   @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
   private Explicador explicador; // adicionado em "Explicador"
 
   @ManyToOne(cascade = CascadeType.PERSIST)
   private Aluno aluno; // adicionado em "Aluno"
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
   private Cadeira cadeira; // adicionado em "Cadeira"
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.PERSIST)
   private Idioma idioma; // ligação unidireccional
 
   // ****** METHODS ******
