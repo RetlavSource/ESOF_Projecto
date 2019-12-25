@@ -24,7 +24,6 @@ public class Cadeira extends BaseModel{
 
   @ManyToOne
   @ToString.Exclude
-  @EqualsAndHashCode.Exclude
   @JsonBackReference
   @EqualsAndHashCode.Exclude
   private Curso curso; // adicionado em "Curso"
