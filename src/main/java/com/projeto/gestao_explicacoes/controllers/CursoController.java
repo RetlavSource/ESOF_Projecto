@@ -23,6 +23,7 @@ public class CursoController {
 
     @Autowired
     public CursoController(CursoService cursoService) {
+
         this.cursoService = cursoService;
     }
 

@@ -25,6 +25,7 @@ public class AlunoController {
 
     @Autowired
     public AlunoController(AlunoService alunoService) {
+
         this.alunoService = alunoService;
     }
 
@@ -54,10 +55,19 @@ public class AlunoController {
 
         Optional<Aluno> criadoAluno = this.alunoService.criarAluno(aluno);
         
-        if (criadoAluno.isEmpty()){
+        /*if (criadoAluno.isEmpty()){
             throw new FalhaCriarException("O aluno com o nome: " + aluno.getNome() + " ja existe!");
         }
-        return ResponseEntity.ok(criadoAluno.get());
+        else {
+
+            return ResponseEntity.ok(criadoAluno.get());
+        }*/
+        if(criadoAluno.isPresent()){
+
+            return ResponseEntity.ok(criadoAluno.get());
+        }
+
+        throw new FalhaCriarException("O aluno com o nome: " + aluno.getNome() + " ja existe!");
     }
 
 

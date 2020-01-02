@@ -3,6 +3,7 @@ package com.projeto.gestao_explicacoes.controllers;
 import com.projeto.gestao_explicacoes.exceptions.FalhaPesquisaException;
 import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.services.faculdadeServices.FaculdadeService;
+import com.projeto.gestao_explicacoes.services.faculdadeServices.FaculdadeServiceDB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class FaculdadeController {
 
     @Autowired
     public FaculdadeController(FaculdadeService faculdadeService) {
+
         this.faculdadeService = faculdadeService;
+        //this.faculdadeService = new FaculdadeServiceDB();
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

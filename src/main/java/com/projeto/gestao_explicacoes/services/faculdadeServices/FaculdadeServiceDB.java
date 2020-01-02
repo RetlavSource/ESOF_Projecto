@@ -18,6 +18,7 @@ public class FaculdadeServiceDB implements FaculdadeService {
 
     @Autowired
     public FaculdadeServiceDB(FaculdadeRepo faculdadeRepo) {
+
         this.faculdadeRepo = faculdadeRepo;
     }
 
@@ -32,6 +33,7 @@ public class FaculdadeServiceDB implements FaculdadeService {
 
     @Override
     public Optional<Faculdade> findById(Long id) {
+
         return this.faculdadeRepo.findById(id);
     }
 

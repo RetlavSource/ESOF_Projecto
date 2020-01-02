@@ -1,6 +1,8 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,10 +24,13 @@ public class Aluno extends BaseModel{
   @ManyToOne
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
-  @JsonBackReference
+  //@JsonBackReference
+  @JsonIgnore
   private Curso curso; // adicionado em "Curso"
 
   @OneToMany(mappedBy = "aluno")
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   // ****** METHODS ******
