@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Atendimento extends BaseModel{
 
-  @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+  @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
   private LocalDateTime data;
 
   @ManyToOne(cascade = CascadeType.PERSIST)
