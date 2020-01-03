@@ -316,9 +316,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private boolean checkForDigitsAndWhiteSpaces(String nome){
 
-        char[] ch=new char[100];
+        char[] ch;
         ch = nome.toCharArray();
-        for(int i=0;ch[i]!='\0';i++){
+        for(int i=0;i<ch.length;i++){
 
             if((ch[i]>='0' && ch[i]<='9') || (ch[i] == '\n') || (ch[i] == '\t') || (ch[i] == '\r')){
 
