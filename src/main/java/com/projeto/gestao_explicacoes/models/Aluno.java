@@ -24,13 +24,11 @@ public class Aluno extends BaseModel{
   @ManyToOne
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
-  //@JsonBackReference
-  @JsonIgnore
+  @JsonBackReference
   private Curso curso; // adicionado em "Curso"
 
-  @OneToMany(mappedBy = "aluno")
-  //@JsonManagedReference
-  @JsonIgnore
+  @OneToMany(mappedBy = "aluno", cascade = CascadeType.PERSIST)
+  @JsonManagedReference
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   // ****** METHODS ******

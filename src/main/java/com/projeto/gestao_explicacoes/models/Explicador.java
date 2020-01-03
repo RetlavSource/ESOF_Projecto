@@ -1,13 +1,12 @@
 package com.projeto.gestao_explicacoes.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,16 +14,18 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Explicador extends BaseModel{
 
   private String nome;
-  private LocalDate dataNascimento;
+  private Integer numero;
 
   @OneToMany(mappedBy = "explicador", cascade = CascadeType.PERSIST)
   @JsonManagedReference
-  private Set<Horario> horario = new HashSet<>();
+  private Set<Horario> horarios = new HashSet<>();
 
-  @OneToMany(cascade = CascadeType.PERSIST)
+  @ManyToMany(mappedBy = "explicadores" , cascade = CascadeType.PERSIST)
+  @JsonManagedReference
   private Set<Idioma> idiomas = new HashSet<>(); // tabela criada automaticamente
 
   @OneToMany(mappedBy = "explicador", cascade = CascadeType.PERSIST)
@@ -41,18 +42,19 @@ public class Explicador extends BaseModel{
     this.nome = nome;
   }
 
-  public Explicador(String nome, LocalDate dataNascimento) {
+  public Explicador(String nome, Integer numero) {
     this.nome = nome;
-    this.dataNascimento = dataNascimento;
+    this.numero = numero;
   }
 
   public void addHorario(Horario horario){
-    this.horario.add(horario);
+    this.horarios.add(horario);
     horario.setExplicador(this);
   }
 
   public void addIdioma(Idioma idioma){
     this.idiomas.add(idioma);
+    idioma.getExplicadores().add(this);
   }
 
   public void addAtendimento(Atendimento atendimento){

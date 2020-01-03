@@ -1,10 +1,8 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Atendimento extends BaseModel{
 
+  @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
   private LocalDateTime data;
 
   @ManyToOne(cascade = CascadeType.PERSIST)
@@ -24,6 +23,9 @@ public class Atendimento extends BaseModel{
   private Explicador explicador; // adicionado em "Explicador"
 
   @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
   private Aluno aluno; // adicionado em "Aluno"
 
   @ManyToOne(cascade = CascadeType.PERSIST)
@@ -32,14 +34,21 @@ public class Atendimento extends BaseModel{
   @JsonBackReference
   private Cadeira cadeira; // adicionado em "Cadeira"
 
-  @OneToOne(cascade = CascadeType.PERSIST)
-  private Idioma idioma; // ligação unidireccional
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Idioma idioma; // adicionado em "Idioma"
 
   // ****** METHODS ******
 
 
   public Atendimento() {
     this.data = LocalDateTime.now();
+  }
+
+  public Atendimento(LocalDateTime data) {
+    this.data = data;
   }
 
   public Atendimento(Explicador explicador, Aluno aluno, Cadeira cadeira, Idioma idioma) {

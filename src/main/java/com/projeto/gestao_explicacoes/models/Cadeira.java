@@ -28,13 +28,13 @@ public class Cadeira extends BaseModel{
   @EqualsAndHashCode.Exclude
   private Curso curso; // adicionado em "Curso"
 
-  @ManyToMany
+  @ManyToMany (cascade = CascadeType.PERSIST)
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @JsonBackReference
   private Set<Explicador> explicadores = new HashSet<>(); // adicionado em "Explicador"
 
-  @OneToMany(mappedBy = "cadeira")
+  @OneToMany(mappedBy = "cadeira", cascade = CascadeType.PERSIST)
   @JsonManagedReference
   private Set<Atendimento> atendimentos = new HashSet<>();
 
