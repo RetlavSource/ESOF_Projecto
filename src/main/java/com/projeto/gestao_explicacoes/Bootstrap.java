@@ -11,8 +11,12 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.time.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 
 @Component
@@ -42,7 +46,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         logger.info("Startup");
 
         exemploEntradas();
-        //novosDados();
+        novosDados();
     }
 
     private void exemploEntradas(){
@@ -156,9 +160,85 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         System.out.println(this.alunoRepo.count() + " " + this.alunoRepo.findAll());
 
 
+        ArrayList<Aluno> alunos=inputNomesManualAtePonto();
+        imprimirAlunos(alunos);
 
 
 
+    }
 
+    private ArrayList<Aluno> inputNomesManualAtePonto(){
+
+        Scanner scanner=new Scanner(System.in);
+        String nome="";
+        String aux="";
+        Integer numero=null;
+        Integer aux_int=null;
+        boolean check=false;
+
+        ArrayList<Aluno> alunos = new ArrayList<>();
+
+        System.out.println("\nIntroduza o nome e respectivo numero de um aluno que deseja adicionar na base de dados(para terminar pressione a tecla \".\" na insercao do nome): \n");
+        while(true) {
+
+            System.out.print("Nome: ");
+
+            try {
+                nome = scanner.nextLine();
+
+                check=checkForDigitsAndWhiteSpaces(nome);
+
+                if(check){
+
+                    System.out.println("\nErro na introducao do nome, volte a tentar!!!\n");
+                    //aux=scanner.nextLine();
+                    continue;
+                }
+
+
+                if (nome.equals(".")) {
+
+                    break;
+                }
+                System.out.print("Numero: ");
+                numero = scanner.nextInt();
+                System.out.println();
+                aux=scanner.nextLine();
+
+            }catch(InputMismatchException ime){
+
+                System.out.println("\nErro na introducao de dados, volte a tentar!!!\n");
+                aux=scanner.nextLine();
+                continue;
+            }
+
+            alunos.add(new Aluno(nome, numero));
+
+        }
+
+        return alunos;
+    }
+
+    private void imprimirAlunos(ArrayList<Aluno> alunos){
+
+        for(Aluno aluno : alunos){
+
+            System.out.println("Nome: " + aluno.getNome() + "\t" + "Numero: " + aluno.getNumero());
+        }
+    }
+
+    private boolean checkForDigitsAndWhiteSpaces(String nome){
+
+        char[] ch=new char[100];
+        ch = nome.toCharArray();
+        for(int i=0;ch[i]!='\0';i++){
+
+            if((ch[i]>='0' && ch[i]<='9') || (ch[i] == '\n') || (ch[i] == '\t') || (ch[i] == '\r')){
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }
