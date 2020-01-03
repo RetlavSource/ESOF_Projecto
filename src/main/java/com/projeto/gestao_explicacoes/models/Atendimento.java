@@ -1,27 +1,61 @@
 package com.projeto.gestao_explicacoes.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@NoArgsConstructor
-public class Atendimento {
+@AllArgsConstructor
+public class Atendimento extends BaseModel{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
   private LocalDateTime data;
 
-  @ManyToOne
-  private Explicador explicador;
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Explicador explicador; // adicionado em "Explicador"
 
-  @ManyToOne
-  private Aluno aluno;
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Aluno aluno; // adicionado em "Aluno"
 
-  @ManyToOne
-  private Cadeira cadeira;
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Cadeira cadeira; // adicionado em "Cadeira"
+
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Idioma idioma; // adicionado em "Idioma"
+
+  // ****** METHODS ******
+
+
+  public Atendimento() {
+    this.data = LocalDateTime.now();
+  }
+
+  public Atendimento(LocalDateTime data) {
+    this.data = data;
+  }
+
+  public Atendimento(Explicador explicador, Aluno aluno, Cadeira cadeira, Idioma idioma) {
+    this();
+    this.explicador = explicador;
+    this.aluno = aluno;
+    this.cadeira = cadeira;
+    this.idioma = idioma;
+  }
 }

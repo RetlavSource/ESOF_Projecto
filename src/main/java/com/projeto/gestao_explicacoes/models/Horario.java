@@ -1,24 +1,38 @@
 package com.projeto.gestao_explicacoes.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @NoArgsConstructor
-public class Horario {
+@AllArgsConstructor
+public class Horario extends BaseModel{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private DayOfWeek diaSemana;
+  @DateTimeFormat(pattern = "HH:mm")
   private LocalTime horaInicio;
+  @DateTimeFormat(pattern = "HH:mm")
   private LocalTime horaFim;
+
+  @ManyToOne
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Explicador explicador; // adicionado em "Explicador"
+
+  // ****** METHODS ******
+
+  public Horario(DayOfWeek diaSemana, LocalTime horaInicio, LocalTime horaFim) {
+    this.diaSemana = diaSemana;
+    this.horaInicio = horaInicio;
+    this.horaFim = horaFim;
+  }
+
 }

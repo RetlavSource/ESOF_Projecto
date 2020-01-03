@@ -1,27 +1,45 @@
 package com.projeto.gestao_explicacoes.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @NoArgsConstructor
-public class Aluno {
+public class Aluno extends BaseModel{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private String nome;
-  private LocalDate dataNascimento;
+  private Integer numero;
 
   @ManyToOne
-  private Curso curso;
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
+  @JsonBackReference
+  private Curso curso; // adicionado em "Curso"
 
-  @OneToMany(mappedBy = "aluno")
+  @OneToMany(mappedBy = "aluno", cascade = CascadeType.PERSIST)
+  @JsonManagedReference
   private Set<Atendimento> atendimentos = new HashSet<>();
+
+  // ****** METHODS ******
+
+  public Aluno(String nome, Integer numero) {
+    this.nome = nome;
+    this.numero = numero;
+  }
+
+  public void addAtendimento(Atendimento atendimento){
+    this.atendimentos.add(atendimento);
+    atendimento.setAluno(this);
+  }
 }

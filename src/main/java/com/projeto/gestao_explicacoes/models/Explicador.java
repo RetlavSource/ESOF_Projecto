@@ -1,36 +1,69 @@
 package com.projeto.gestao_explicacoes.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @NoArgsConstructor
-public class Explicador {
+@AllArgsConstructor
+public class Explicador extends BaseModel{
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private String nome;
-  private LocalDate dataNascimento;
+  private Integer numero;
 
-  @OneToMany
-  @JoinTable(name = "explicador_horario", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "horario_id"))
+  @OneToMany(mappedBy = "explicador", cascade = CascadeType.PERSIST)
+  @JsonManagedReference
   private Set<Horario> horarios = new HashSet<>();
 
-  @OneToMany
-  @JoinTable(name = "explicador_idioma", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "idioma_id"))
-  private Set<Idioma> idiomas = new HashSet<>();
+  @ManyToMany(mappedBy = "explicadores" , cascade = CascadeType.PERSIST)
+  @JsonManagedReference
+  private Set<Idioma> idiomas = new HashSet<>(); // tabela criada automaticamente
 
-  @OneToMany(mappedBy = "explicador")
+  @OneToMany(mappedBy = "explicador", cascade = CascadeType.PERSIST)
+  @JsonManagedReference
   private Set<Atendimento> atendimentos = new HashSet<>();
 
-  @ManyToMany
-  @JoinTable(name = "explicador_cadeira", joinColumns = @JoinColumn(name = "explicador_id"), inverseJoinColumns = @JoinColumn(name = "cadeira_id"))
+  @ManyToMany(mappedBy = "explicadores", cascade = CascadeType.PERSIST)
+  @JsonManagedReference
   private Set<Cadeira> cadeiras = new HashSet<>();
+
+  // ****** METHODS ******
+
+  public Explicador(String nome){
+    this.nome = nome;
+  }
+
+  public Explicador(String nome, Integer numero) {
+    this.nome = nome;
+    this.numero = numero;
+  }
+
+  public void addHorario(Horario horario){
+    this.horarios.add(horario);
+    horario.setExplicador(this);
+  }
+
+  public void addIdioma(Idioma idioma){
+    this.idiomas.add(idioma);
+    idioma.getExplicadores().add(this);
+  }
+
+  public void addAtendimento(Atendimento atendimento){
+    this.atendimentos.add(atendimento);
+    atendimento.setExplicador(this);
+  }
+
+  public void addCadeira(Cadeira cadeira) {
+    this.cadeiras.add(cadeira);
+    cadeira.getExplicadores().add(this);
+  }
 }
