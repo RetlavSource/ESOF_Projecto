@@ -246,10 +246,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         System.out.println(this.horarioRepo.count() + " " + this.horarioRepo.findAll());
         System.out.println(this.atendimentoRepo.count() + " " + this.atendimentoRepo.findAll());
 
-
+/*
         ArrayList<Aluno> alunos=inputNomesManualAtePonto();
         imprimirAlunos(alunos);
-
+*/
 
 
     }
