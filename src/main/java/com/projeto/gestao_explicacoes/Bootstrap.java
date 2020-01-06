@@ -294,7 +294,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
             }catch(InputMismatchException ime){
 
-                System.out.println("\nErro na introducao de dados, volte a tentar!!!\n");
+                System.out.println("\nErro na introducao do numero, volte a tentar!!!\n");
                 aux=scanner.nextLine();
                 continue;
             }
@@ -308,10 +308,13 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private void imprimirAlunos(ArrayList<Aluno> alunos){
 
+        System.out.println("\nImpressao do array list alunos que vai ser guardado na base de dados: ");
+        System.out.println("---------------------------------------------------------------------");
         for(Aluno aluno : alunos){
 
             System.out.println("Nome: " + aluno.getNome() + "\t" + "Numero: " + aluno.getNumero());
         }
+        System.out.println();
     }
 
     private boolean checkForDigitsAndWhiteSpaces(String nome){
