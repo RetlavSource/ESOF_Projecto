@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface ExplicadorRepo extends CrudRepository<Explicador, Long> {
 
     Optional<Explicador> findByNome(String nome);
+    Optional<Explicador> findByNumero(Integer numero);
     Optional<Explicador> findByCadeiras(Cadeira cadeira);
     Optional<Explicador> findByIdiomas(Idioma idioma);
 

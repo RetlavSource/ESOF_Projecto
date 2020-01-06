@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +19,8 @@ public class Faculdade extends BaseModel{
   private String nome;
 
   @OneToMany(mappedBy = "faculdade", cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference //Dá erro com esta anotação quando fazemos um POST
+  @JsonIgnore
   private Set<Curso> cursos = new HashSet<>();
 
   // ****** METHODS ******

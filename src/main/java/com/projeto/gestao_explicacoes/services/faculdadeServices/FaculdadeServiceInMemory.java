@@ -20,4 +20,10 @@ public class FaculdadeServiceInMemory implements FaculdadeService {
     public Optional<Faculdade> findById(Long id) {
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Faculdade> criarFaculdade(Faculdade faculdade) {
+
+        return Optional.empty();
+    }
 }

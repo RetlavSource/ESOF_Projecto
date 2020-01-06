@@ -1,6 +1,6 @@
 package com.projeto.gestao_explicacoes.controllers;
 
-import com.projeto.gestao_explicacoes.models.Cadeira;
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Explicador;
 import com.projeto.gestao_explicacoes.services.cadeiraServices.CadeiraService;
 import com.projeto.gestao_explicacoes.services.explicadorServices.ExplicadorService;
@@ -11,8 +11,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -35,4 +38,18 @@ public class ExplicadorController {
         return ResponseEntity.ok(this.explicadorService.findAll());
     }
 
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Explicador> createExplicador(@RequestBody Explicador explicador){
+
+        this.logger.info("Recebido um pedido POST");
+
+        Optional<Explicador> criadoExplicador = this.explicadorService.criarExplicador(explicador);
+
+        if(criadoExplicador.isPresent()){
+
+            return ResponseEntity.ok(criadoExplicador.get());
+        }
+
+        throw new FalhaCriarException("O explicador com o nome: " + explicador.getNome() + " ja existe!");
+    }
 }

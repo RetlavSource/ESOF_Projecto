@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.controllers;
 
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.exceptions.FalhaPesquisaException;
 import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.services.faculdadeServices.FaculdadeService;
@@ -10,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.Set;
@@ -51,5 +50,21 @@ public class FaculdadeController {
 
         throw new FalhaPesquisaException("Explicador com o id: " + id + " inexistente!");
 
+    }
+
+    // Ver comentario em FaculdadeServiceDB
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Faculdade> createFaculdade(@RequestBody Faculdade faculdade){
+
+        this.logger.info("Recebido um pedido POST");
+
+        Optional<Faculdade> criadaFaculdade = this.faculdadeService.criarFaculdade(faculdade);
+
+        if(criadaFaculdade.isPresent()){
+
+            return ResponseEntity.ok(criadaFaculdade.get());
+        }
+
+        throw new FalhaCriarException("O faculdade com o nome: " + faculdade.getNome() + " ja existe!");
     }
 }

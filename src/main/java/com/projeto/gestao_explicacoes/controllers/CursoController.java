@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.controllers;
 
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Curso;
 import com.projeto.gestao_explicacoes.services.cursoServices.CursoService;
 import org.slf4j.Logger;
@@ -8,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -34,4 +35,18 @@ public class CursoController {
         return ResponseEntity.ok(this.cursoService.findAll());
     }
 
+    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("id")Long id){
+
+        this.logger.info("Recebido um pedido POST");
+
+        Optional<Curso> criadoCursoFaculdade = this.cursoService.criarCursoFaculdade(curso,id);
+
+        if(criadoCursoFaculdade.isPresent()){
+
+            return ResponseEntity.ok(criadoCursoFaculdade.get());
+        }
+
+        throw new FalhaCriarException("O curso de: " + curso.getNome() + " nao foi criado com sucesso na faculdade de id: " + id + "!");
+    }
 }

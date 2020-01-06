@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.services.cursoServices;
 
+import com.projeto.gestao_explicacoes.models.Aluno;
 import com.projeto.gestao_explicacoes.models.Curso;
 
 import java.util.Optional;
@@ -9,4 +10,5 @@ public interface CursoService {
 
     Set<Curso> findAll();
 
+    Optional<Curso> criarCursoFaculdade(Curso curso, Long id);
 }

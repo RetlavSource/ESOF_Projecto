@@ -37,4 +37,18 @@ public class FaculdadeServiceDB implements FaculdadeService {
         return this.faculdadeRepo.findById(id);
     }
 
+    @Override
+    public Optional<Faculdade> criarFaculdade(Faculdade faculdade) {
+
+        // Procura por Id? por nome? criar atributo numero e procurar por nome?
+        if(this.faculdadeRepo.findByNome(faculdade.getNome()).isPresent()){
+
+            return Optional.empty();
+        }
+
+        Faculdade faculdadeCriada = this.faculdadeRepo.save(faculdade);
+
+        return Optional.of(faculdadeCriada);
+    }
+
 }

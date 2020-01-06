@@ -11,4 +11,6 @@ public interface FaculdadeService {
 
     Optional<Faculdade> findById(Long id);
 
+    Optional<Faculdade> criarFaculdade(Faculdade faculdade);
+
 }

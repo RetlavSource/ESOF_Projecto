@@ -24,7 +24,7 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @Autowired
-    public AlunoController(AlunoService alunoService) {
+    public AlunoController(AlunoService alunoService){
 
         this.alunoService = alunoService;
     }

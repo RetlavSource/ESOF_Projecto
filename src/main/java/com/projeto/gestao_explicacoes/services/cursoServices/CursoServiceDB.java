@@ -1,12 +1,15 @@
 package com.projeto.gestao_explicacoes.services.cursoServices;
 
 import com.projeto.gestao_explicacoes.models.Curso;
+import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.repositories.CursoRepo;
+import com.projeto.gestao_explicacoes.repositories.FaculdadeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -14,10 +17,13 @@ import java.util.Set;
 public class CursoServiceDB implements CursoService {
 
     private CursoRepo cursoRepo;
+    private FaculdadeRepo faculdadeRepo;
 
     @Autowired
-    public CursoServiceDB(CursoRepo cursoRepo) {
+    public CursoServiceDB(CursoRepo cursoRepo, FaculdadeRepo faculdadeRepo) {
+
         this.cursoRepo = cursoRepo;
+        this.faculdadeRepo = faculdadeRepo;
     }
 
     @Override
@@ -27,5 +33,44 @@ public class CursoServiceDB implements CursoService {
             cursos.add(curso);
         }
         return cursos;
+    }
+
+    @Override
+    public Optional<Curso> criarCursoFaculdade(Curso curso, Long id) {
+
+            for(Faculdade faculdade : this.faculdadeRepo.findAll()){
+
+                if(faculdade.getId().equals(id)){
+
+                    faculdade.addCurso(curso);
+                    //this.faculdadeRepo.save(faculdade); Não sei se é correto
+
+                    if (this.cursoRepo.findByNome(curso.getNome()).isPresent()) {
+
+                        return Optional.empty();
+
+                    }else{
+
+                        this.cursoRepo.save(curso);
+                        return Optional.of(curso);
+                    }
+
+                }
+
+            }
+
+        /*
+        for(Faculdade faculdade : this.faculdadeRepo.findAll()){
+
+            if(faculdade.getId().equals(id)){
+
+                faculdade.getCursos().add(curso);
+                this.faculdadeRepo.
+            }
+        }*/
+
+
+        return Optional.empty();
+
     }
 }
