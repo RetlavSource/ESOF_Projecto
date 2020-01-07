@@ -4,7 +4,25 @@
 
 Este é um projeto prático para a disciplina de  ***Engenharia de Software*** na ***Universidade Fernando Pessoa***.
 
-### Documentação de referência
+## Endpoints utilizados:
+- **GET**
+    - /cadeira -- *`lista todas as cadeiras`*
+    - /cadeira/1 -- *`lista a cadeira com o id=1`*
+    - /atendimento -- *`lista todos os atendimentos`*
+    - /atendimento/1 -- *`lista o atendimento com o id=1`*
+
+- **POST**
+    - /cadeira -- *`cria uma cadeira`*
+    - /cadeira/1 -- *`cria uma cadeira no curso com o id=1`*
+    - /atendimento -- *`cria um atendimento`*
+- **PUT**
+    - /cadeira/1 -- *`modifica a cadeira com o id=1`*
+    - /atendimento/1 -- *`modifica o atendimento com o id=1`*
+- **DELETE**
+     - /cadeira/1 -- *`remove a cadeira com o id=1`*
+     - /atendimento/1 -- *`remove o atendimento com o id=1`*
+
+## Documentação de referência
 Documentação utilizada na realização do projeto:
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
 * [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/maven-plugin/)
@@ -13,7 +31,7 @@ Documentação utilizada na realização do projeto:
 * [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.2.0.RELEASE/reference/htmlsingle/#using-boot-devtools)
 * [Thymeleaf](https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-spring-mvc-template-engines)
 
-### Guias de utilização
+## Guias de utilização
 Guias de utilização de algumas ferramentas utilizadas:
 
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
