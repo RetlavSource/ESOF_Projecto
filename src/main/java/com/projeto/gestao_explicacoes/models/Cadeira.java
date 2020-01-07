@@ -49,6 +49,11 @@ public class Cadeira extends BaseModel{
     atendimento.setCadeira(this);
   }
 
+  public void removeAtendimento(Atendimento atendimento) {
+    this.atendimentos.remove(atendimento);
+    atendimento.setCadeira(null);
+  }
+
   @ToString.Include
   public ArrayList<String> explicadores() {
     ArrayList<String> nomeExplicadores = new ArrayList<>();
