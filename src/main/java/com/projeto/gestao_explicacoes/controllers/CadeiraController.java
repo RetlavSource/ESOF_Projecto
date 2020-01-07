@@ -3,7 +3,6 @@ package com.projeto.gestao_explicacoes.controllers;
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Cadeira;
 import com.projeto.gestao_explicacoes.models.Curso;
-import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.services.cadeiraServices.CadeiraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,18 +51,18 @@ public class CadeiraController {
      }
      */
     @PostMapping(value = "/{curso}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cadeira> createCursoInFaculdade(@RequestBody Cadeira cadeira, @PathVariable("curso") Curso curso){
+    public ResponseEntity<Cadeira> createCadeiraInCurso(@RequestBody Cadeira cadeira, @PathVariable("curso") Curso curso){
 
         this.logger.info("Recebido um pedido POST");
 
-        Optional<Cadeira> criadaCadeiraFaculdade = this.cadeiraService.criarCadeiraCurso(cadeira,curso);
+        Optional<Cadeira> criadaCadeiraCurso = this.cadeiraService.criarCadeiraCurso(cadeira,curso);
 
-        if(criadaCadeiraFaculdade.isPresent()){
+        if(criadaCadeiraCurso.isPresent()){
 
-            return ResponseEntity.ok(criadaCadeiraFaculdade.get());
+            return ResponseEntity.ok(criadaCadeiraCurso.get());
         }
 
-        throw new FalhaCriarException("A cadeira de: " + cadeira.getNome() + " nao foi criado com sucesso na curso de: " + curso.getNome() + "!");
+        throw new FalhaCriarException("A cadeira de: " + cadeira.getNome() + " nao foi criado com sucesso no curso de: " + curso.getNome() + "!");
     }
 
 }

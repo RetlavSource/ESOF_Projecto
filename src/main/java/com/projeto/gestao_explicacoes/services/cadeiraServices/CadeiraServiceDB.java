@@ -2,7 +2,6 @@ package com.projeto.gestao_explicacoes.services.cadeiraServices;
 
 import com.projeto.gestao_explicacoes.models.Cadeira;
 import com.projeto.gestao_explicacoes.models.Curso;
-import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.repositories.CadeiraRepo;
 import com.projeto.gestao_explicacoes.repositories.CursoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,26 +39,20 @@ public class CadeiraServiceDB implements CadeiraService {
     @Override
     public Optional<Cadeira> criarCadeiraCurso(Cadeira cadeira, Curso curso) {
 
-        if (this.cursoRepo.findByNome(curso.getNome()).isPresent()) {
+        Optional<Curso> cursoOptional = this.cursoRepo.findByNome(curso.getNome());
 
-            for (Curso cursoAux : this.cursoRepo.findAll()) {
-
-                if (cursoAux.getNome().equals(curso.getNome())) {
-
-                    if (this.cadeiraRepo.findByNome(cadeira.getNome()).isPresent()) {
-
-                        return Optional.empty();
-
-                    } else {
-
-                        curso.addCadeira(cadeira);
-                        cadeiraRepo.save(cadeira);
-                        return Optional.of(cadeira);
-                    }
+        if (cursoOptional.isPresent()) {
+            for (Cadeira cadeiraAux : cursoOptional.get().getCadeiras()) {
+                if (cadeiraAux.getNome().equals(cadeira.getNome())) {
+                    return Optional.empty();
                 }
-
             }
+
+            cursoOptional.get().addCadeira(cadeira);
+            this.cursoRepo.save(cursoOptional.get());
+            return Optional.of(cadeira);
         }
+
         return Optional.empty();
     }
 }

@@ -39,31 +39,20 @@ public class CursoServiceDB implements CursoService {
     @Override
     public Optional<Curso> criarCursoFaculdade(Curso curso, Faculdade faculdade) {
 
-        if(this.faculdadeRepo.findByNome(faculdade.getNome()).isPresent()) {
+        Optional<Faculdade> faculdadeOptional = this.faculdadeRepo.findByNome(faculdade.getNome());
 
-            for (Faculdade faculdadeAux : this.faculdadeRepo.findAll()) {
-
-                if (faculdadeAux.getNome().equals(faculdade.getNome())) {
-
-                    if(this.cursoRepo.findByNome(curso.getNome()).isPresent()){
-
-                        return Optional.empty();
-
-                    }else{
-
-                        faculdade.addCurso(curso);
-                        cursoRepo.save(curso);
-                        return Optional.of(curso);
-                    }
-
-
+        if (faculdadeOptional.isPresent()) {
+            for (Curso cursoAux : faculdadeOptional.get().getCursos()) {
+                if (cursoAux.getNome().equals(curso.getNome())) {
+                    return Optional.empty();
                 }
-
             }
 
+            faculdadeOptional.get().addCurso(curso);
+            this.faculdadeRepo.save(faculdadeOptional.get());
+            return Optional.of(curso);
         }
 
         return Optional.empty();
-
     }
 }

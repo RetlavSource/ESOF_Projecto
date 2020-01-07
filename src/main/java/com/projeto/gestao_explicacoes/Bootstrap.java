@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Component
@@ -51,6 +51,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         logger.info("Startup");
 
         //exemploEntradas();
+        //testStringBuilder();
         novosDados();
     }
 
@@ -73,6 +74,23 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         // Para introdução de Idiomas (Idioma em UpperCase)
         String idioma = "português";
         System.out.println(idioma.toUpperCase());
+    }
+
+    private void testStringBuilder() {
+
+        Map<String,String> mapping=new HashMap<>();
+        mapping.put("UFP","http://localhost:8080");
+        mapping.put("UP","http://localhost:8081");
+
+
+        //
+        String uni="UFP";
+        StringBuilder sb=new StringBuilder();
+
+        sb.append(mapping.get(uni)).append("/explicador");
+
+        System.out.println(sb.toString());
+
     }
 
     private void novosDados(){
