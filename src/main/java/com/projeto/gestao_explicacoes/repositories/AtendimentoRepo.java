@@ -3,7 +3,6 @@ package com.projeto.gestao_explicacoes.repositories;
 import com.projeto.gestao_explicacoes.models.Aluno;
 import com.projeto.gestao_explicacoes.models.Atendimento;
 import com.projeto.gestao_explicacoes.models.Explicador;
-import com.projeto.gestao_explicacoes.models.Idioma;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

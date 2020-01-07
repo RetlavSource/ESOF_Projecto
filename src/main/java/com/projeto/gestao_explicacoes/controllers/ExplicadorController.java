@@ -1,8 +1,6 @@
 package com.projeto.gestao_explicacoes.controllers;
 
-import com.projeto.gestao_explicacoes.models.Cadeira;
 import com.projeto.gestao_explicacoes.models.Explicador;
-import com.projeto.gestao_explicacoes.services.cadeiraServices.CadeiraService;
 import com.projeto.gestao_explicacoes.services.explicadorServices.ExplicadorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
