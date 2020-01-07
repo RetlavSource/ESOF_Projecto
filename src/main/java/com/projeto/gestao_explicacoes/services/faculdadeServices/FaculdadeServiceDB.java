@@ -40,7 +40,6 @@ public class FaculdadeServiceDB implements FaculdadeService {
     @Override
     public Optional<Faculdade> criarFaculdade(Faculdade faculdade) {
 
-        // Procura por Id? por nome? criar atributo numero e procurar por nome?
         if(this.faculdadeRepo.findByNome(faculdade.getNome()).isPresent()){
 
             return Optional.empty();

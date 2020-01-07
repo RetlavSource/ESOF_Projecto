@@ -2,6 +2,7 @@ package com.projeto.gestao_explicacoes.controllers;
 
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Curso;
+import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.services.cursoServices.CursoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,18 +36,32 @@ public class CursoController {
         return ResponseEntity.ok(this.cursoService.findAll());
     }
 
-    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("id")Long id){
+    //Mandei objeto dentro de objeto pelo postman
+    /** Como mandar o pedido POST na aplicação Postman
+     *
+     * Sem acentos no payload
+     * no request POST do postman: localhost:8082/curso/1
+     {
+        "nome" : "Engenharia Civil",
+
+        "faculdade" : [
+
+            {"nome" : "Ciencias e Tecnologia"}
+        ]
+     }
+     */
+    @PostMapping(value = "/{faculdade}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("faculdade") Faculdade faculdade){
 
         this.logger.info("Recebido um pedido POST");
 
-        Optional<Curso> criadoCursoFaculdade = this.cursoService.criarCursoFaculdade(curso,id);
+        Optional<Curso> criadoCursoFaculdade = this.cursoService.criarCursoFaculdade(curso,faculdade);
 
         if(criadoCursoFaculdade.isPresent()){
 
             return ResponseEntity.ok(criadoCursoFaculdade.get());
         }
 
-        throw new FalhaCriarException("O curso de: " + curso.getNome() + " nao foi criado com sucesso na faculdade de id: " + id + "!");
+        throw new FalhaCriarException("O curso de: " + curso.getNome() + " nao foi criado com sucesso na faculdade de: " + faculdade.getNome() + "!");
     }
 }

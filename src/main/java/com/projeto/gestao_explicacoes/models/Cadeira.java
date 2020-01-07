@@ -1,6 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,18 +25,21 @@ public class Cadeira extends BaseModel{
 
   @ManyToOne
   @ToString.Exclude
-  @JsonBackReference
+  //@JsonBackReference
+  @JsonIgnore
   @EqualsAndHashCode.Exclude
   private Curso curso; // adicionado em "Curso"
 
   @ManyToMany (cascade = CascadeType.PERSIST)
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
-  @JsonBackReference
+  //@JsonBackReference
+  @JsonIgnore
   private Set<Explicador> explicadores = new HashSet<>(); // adicionado em "Explicador"
 
   @OneToMany(mappedBy = "cadeira", cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   // ****** METHODS ******

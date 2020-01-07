@@ -16,9 +16,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 
 @Component
@@ -80,12 +77,12 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private void novosDados(){
 
-        Faculdade faculdade1 = new Faculdade("Ciências e Tecnologia");
-        Faculdade faculdade2 = new Faculdade("Ciências Humanas e Sociais");
-        Faculdade faculdade3 = new Faculdade("Ciências da Saúde");
+        Faculdade faculdade1 = new Faculdade("Ciencias e Tecnologia");
+        Faculdade faculdade2 = new Faculdade("Ciencias Humanas e Sociais");
+        Faculdade faculdade3 = new Faculdade("Ciencias da Saude");
 
 
-        Curso engInformatica = new Curso("Engenharia Informática");
+        Curso engInformatica = new Curso("Engenharia Informatica");
         faculdade1.addCurso(engInformatica);
 
         Curso engCivil = new Curso("Engenharia Civil");
@@ -104,10 +101,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Cadeira alg2 = new Cadeira("Algoritmos e estruturas de Dados II", "ALG2");
         engInformatica.addCadeira(alg2);
 
-        Cadeira lp1 = new Cadeira("Linguagens de Programação I", "LP1");
+        Cadeira lp1 = new Cadeira("Linguagens de Programacao I", "LP1");
         engInformatica.addCadeira(lp1);
 
-        Cadeira lp2 = new Cadeira("Linguagens de Programação II", "LP2");
+        Cadeira lp2 = new Cadeira("Linguagens de Programacao II", "LP2");
         engInformatica.addCadeira(lp2);
 
         Cadeira so = new Cadeira("Sistemas Operativos", "SO");
@@ -119,10 +116,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Cadeira fisica = new Cadeira("Fisica", "FIS");
         engCivil.addCadeira(fisica);
 
-        Cadeira materiais = new Cadeira("Materiais de Construção", "MAT");
+        Cadeira materiais = new Cadeira("Materiais de Construcao", "MAT");
         engCivil.addCadeira(materiais);
 
-        Cadeira resistencia = new Cadeira("Resistência de Materiais", "RES");
+        Cadeira resistencia = new Cadeira("Resistencia de Materiais", "RES");
         engCivil.addCadeira(resistencia);
 
         Cadeira psocial = new Cadeira("Psicologia Social", "PSO");
@@ -131,13 +128,13 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Cadeira neuro = new Cadeira("Neuropsicologia", "NPS");
         psicologia.addCadeira(neuro);
 
-        Cadeira juridica = new Cadeira("Psicologia Jurídica", "PSJ");
+        Cadeira juridica = new Cadeira("Psicologia Juridica", "PSJ");
         psicologia.addCadeira(juridica);
 
         Cadeira fisiologia = new Cadeira("Anatomofisiologia", "AFI");
         fisioterapia.addCadeira(fisiologia);
 
-        Cadeira bioquimica = new Cadeira("Bioquimica Fisiológica", "BFI");
+        Cadeira bioquimica = new Cadeira("Bioquimica Fisiologica", "BFI");
         fisioterapia.addCadeira(bioquimica);
 
         Cadeira motricidade = new Cadeira("Motricidade Humana", "MHU");
@@ -149,19 +146,19 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Aluno gustavo = new Aluno("Gustavo Teixeira", 21736);
         engInformatica.addAluno(gustavo);
 
-        Aluno manuel = new Aluno("Manuel António", 13975);
+        Aluno manuel = new Aluno("Manuel Antonio", 13975);
         engCivil.addAluno(manuel);
 
         Aluno maria = new Aluno("Maria Aparecida", 33971);
         psicologia.addAluno(maria);
 
-        Aluno jose = new Aluno("José Manuel", 25344);
+        Aluno jose = new Aluno("Jose Manuel", 25344);
         fisioterapia.addAluno(jose);
 
-        Idioma portugues = new Idioma("Português", "PT");
-        Idioma portuguesBr = new Idioma("Português-BR", "PT-BR");
+        Idioma portugues = new Idioma("Portugues", "PT");
+        Idioma portuguesBr = new Idioma("Portugues-BR", "PT-BR");
         Idioma espanhol = new Idioma("Espanhol", "ES");
-        Idioma inglesUk = new Idioma("Inglês-UK", "EN-UK");
+        Idioma inglesUk = new Idioma("Ingles-UK", "EN-UK");
         Idioma coreano = new Idioma("Coreano", "KOR");
 
         Explicador alessandro = new ExplicadorBuilder().setNome("Alessandro Moreira").setNumero(21064)
@@ -246,89 +243,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         System.out.println(this.horarioRepo.count() + " " + this.horarioRepo.findAll());
         System.out.println(this.atendimentoRepo.count() + " " + this.atendimentoRepo.findAll());
 
-/*
-        ArrayList<Aluno> alunos=inputNomesManualAtePonto();
-        imprimirAlunos(alunos);
-*/
-
-
     }
 
-    private ArrayList<Aluno> inputNomesManualAtePonto(){
-
-        Scanner scanner=new Scanner(System.in);
-        String nome="";
-        String aux="";
-        Integer numero=null;
-        Integer aux_int=null;
-        boolean check=false;
-
-        ArrayList<Aluno> alunos = new ArrayList<>();
-
-        System.out.println("\nIntroduza o nome e respectivo numero de um aluno que deseja adicionar na base de dados(para terminar pressione a tecla \".\" na insercao do nome): \n");
-        while(true) {
-
-            System.out.print("Nome: ");
-
-            try {
-                nome = scanner.nextLine();
-
-                check=checkForDigitsAndWhiteSpaces(nome);
-
-                if(check){
-
-                    System.out.println("\nErro na introducao do nome, volte a tentar!!!\n");
-                    //aux=scanner.nextLine();
-                    continue;
-                }
-
-
-                if (nome.equals(".")) {
-
-                    break;
-                }
-                System.out.print("Numero: ");
-                numero = scanner.nextInt();
-                System.out.println();
-                aux=scanner.nextLine();
-
-            }catch(InputMismatchException ime){
-
-                System.out.println("\nErro na introducao do numero, volte a tentar!!!\n");
-                aux=scanner.nextLine();
-                continue;
-            }
-
-            alunos.add(new Aluno(nome, numero));
-
-        }
-
-        return alunos;
-    }
-
-    private void imprimirAlunos(ArrayList<Aluno> alunos){
-
-        System.out.println("\nImpressao do array list alunos que vai ser guardado na base de dados: ");
-        System.out.println("---------------------------------------------------------------------");
-        for(Aluno aluno : alunos){
-
-            System.out.println("Nome: " + aluno.getNome() + "\t" + "Numero: " + aluno.getNumero());
-        }
-        System.out.println();
-    }
-
-    private boolean checkForDigitsAndWhiteSpaces(String nome){
-
-        char[] ch;
-        ch = nome.toCharArray();
-        for(int i=0;i<ch.length;i++){
-
-            if((ch[i]>='0' && ch[i]<='9') || (ch[i] == '\n') || (ch[i] == '\t') || (ch[i] == '\r')){
-
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

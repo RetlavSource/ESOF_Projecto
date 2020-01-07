@@ -35,40 +35,33 @@ public class CursoServiceDB implements CursoService {
         return cursos;
     }
 
+    //Curso tem que estar obrigatoriamente associada a uma faculdade na sua criacao
     @Override
-    public Optional<Curso> criarCursoFaculdade(Curso curso, Long id) {
+    public Optional<Curso> criarCursoFaculdade(Curso curso, Faculdade faculdade) {
 
-            for(Faculdade faculdade : this.faculdadeRepo.findAll()){
+        if(this.faculdadeRepo.findByNome(faculdade.getNome()).isPresent()) {
 
-                if(faculdade.getId().equals(id)){
+            for (Faculdade faculdadeAux : this.faculdadeRepo.findAll()) {
 
-                    faculdade.addCurso(curso);
-                    //this.faculdadeRepo.save(faculdade); Não sei se é correto
+                if (faculdadeAux.getNome().equals(faculdade.getNome())) {
 
-                    if (this.cursoRepo.findByNome(curso.getNome()).isPresent()) {
+                    if(this.cursoRepo.findByNome(curso.getNome()).isPresent()){
 
                         return Optional.empty();
 
                     }else{
 
-                        this.cursoRepo.save(curso);
+                        faculdade.addCurso(curso);
+                        cursoRepo.save(curso);
                         return Optional.of(curso);
                     }
+
 
                 }
 
             }
 
-        /*
-        for(Faculdade faculdade : this.faculdadeRepo.findAll()){
-
-            if(faculdade.getId().equals(id)){
-
-                faculdade.getCursos().add(curso);
-                this.faculdadeRepo.
-            }
-        }*/
-
+        }
 
         return Optional.empty();
 
