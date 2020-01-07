@@ -57,9 +57,19 @@ public class Explicador extends BaseModel{
     horario.setExplicador(this);
   }
 
+  public void removeHorario(Horario horario){
+    this.horarios.remove(horario);
+    horario.setExplicador(null);
+  }
+
   public void addIdioma(Idioma idioma){
     this.idiomas.add(idioma);
     idioma.getExplicadores().add(this);
+  }
+
+  public void removeIdioma(Idioma idioma){
+    this.idiomas.remove(idioma);
+    idioma.getExplicadores().remove(this);
   }
 
   public void addAtendimento(Atendimento atendimento){
@@ -67,8 +77,18 @@ public class Explicador extends BaseModel{
     atendimento.setExplicador(this);
   }
 
+  public void removeAtendimento(Atendimento atendimento){
+    this.atendimentos.remove(atendimento);
+    atendimento.setExplicador(null);
+  }
+
   public void addCadeira(Cadeira cadeira) {
     this.cadeiras.add(cadeira);
     cadeira.getExplicadores().add(this);
+  }
+
+  public void removeCadeira(Cadeira cadeira) {
+    this.cadeiras.remove(cadeira);
+    cadeira.getExplicadores().remove(this);
   }
 }

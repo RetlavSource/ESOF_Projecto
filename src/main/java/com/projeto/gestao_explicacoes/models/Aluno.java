@@ -42,4 +42,9 @@ public class Aluno extends BaseModel{
     this.atendimentos.add(atendimento);
     atendimento.setAluno(this);
   }
+
+  public void removeAtendimento(Atendimento atendimento) {
+    this.atendimentos.remove(atendimento);
+    atendimento.setAluno(null);
+  }
 }

@@ -1,7 +1,7 @@
 package com.projeto.gestao_explicacoes.controllers;
 
-import com.projeto.gestao_explicacoes.models.Atendimento;
-import com.projeto.gestao_explicacoes.services.atendimentoServices.AtendimentoService;
+import com.projeto.gestao_explicacoes.models.Idioma;
+import com.projeto.gestao_explicacoes.services.idiomaServices.IdiomaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +14,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/atendimento")
-public class AtendimentoController {
+@RequestMapping("/idioma")
+public class IdiomaController {
 
     private Logger logger= LoggerFactory.getLogger(this.getClass());
 
-    private AtendimentoService atendimentoService;
+    private IdiomaService idiomaService;
 
     @Autowired
-    public AtendimentoController(AtendimentoService atendimentoService) {
-        this.atendimentoService = atendimentoService;
+    public IdiomaController(IdiomaService idiomaService) {
+        this.idiomaService = idiomaService;
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Atendimento>> getAllAtendimentos() {
+    public ResponseEntity<Set<Idioma>> getAllIdiomas() {
         this.logger.info("Recebido um pedido GET");
 
-        return ResponseEntity.ok(this.atendimentoService.findAll());
+        return ResponseEntity.ok(this.idiomaService.findAll());
     }
+
 }

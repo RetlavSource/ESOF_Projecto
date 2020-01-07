@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -49,9 +48,19 @@ public class Curso extends BaseModel{
     cadeira.setCurso(this);
   }
 
+  public void removeCadeira(Cadeira cadeira) {
+    this.cadeiras.remove(cadeira);
+    cadeira.setCurso(null);
+  }
+
   public void addAluno(Aluno aluno){
     this.alunos.add(aluno);
     aluno.setCurso(this);
+  }
+
+  public void removeAluno(Aluno aluno){
+    this.alunos.remove(aluno);
+    aluno.setCurso(null);
   }
 
 }

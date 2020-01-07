@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -52,6 +51,11 @@ public class Cadeira extends BaseModel{
   public void addAtendimento(Atendimento atendimento){
     this.atendimentos.add(atendimento);
     atendimento.setCadeira(this);
+  }
+
+  public void removeAtendimento(Atendimento atendimento) {
+    this.atendimentos.remove(atendimento);
+    atendimento.setCadeira(null);
   }
 
   @ToString.Include
