@@ -4,7 +4,6 @@ import com.projeto.gestao_explicacoes.models.Aluno;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository

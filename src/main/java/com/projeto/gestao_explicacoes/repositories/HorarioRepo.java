@@ -1,6 +1,5 @@
 package com.projeto.gestao_explicacoes.repositories;
 
-import com.projeto.gestao_explicacoes.models.Curso;
 import com.projeto.gestao_explicacoes.models.Horario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
