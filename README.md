@@ -15,9 +15,11 @@ Este é um projeto prático para a disciplina de  ***Engenharia de Software*** n
     *   /cadeira -- *`cria uma cadeira`*
     *   /cadeira/1 -- *`cria uma cadeira no curso com o id=1`*
     *   /atendimento -- *`cria um atendimento`*
+
 *   **PUT**
     *   /cadeira/1 -- *`modifica a cadeira com o id=1`*
     *   /atendimento/1 -- *`modifica o atendimento com o id=1`*
+    
 *   **DELETE**
     *   /cadeira/1 -- *`remove a cadeira com o id=1`*
     *   /atendimento/1 -- *`remove o atendimento com o id=1`*
