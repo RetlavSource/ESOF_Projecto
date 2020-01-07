@@ -31,4 +31,9 @@ public class Faculdade extends BaseModel{
     this.cursos.add(curso);
     curso.setFaculdade(this);
   }
+
+  public void removeCurso(Curso curso){
+    this.cursos.remove(curso);
+    curso.setFaculdade(null);
+  }
 }

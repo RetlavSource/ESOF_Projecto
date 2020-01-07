@@ -44,4 +44,9 @@ public class Idioma extends BaseModel{
     this.atendimentos.add(atendimento);
     atendimento.setIdioma(this);
   }
+
+  public void removeAtendimento(Atendimento atendimento) {
+    this.atendimentos.remove(atendimento);
+    atendimento.setIdioma(null);
+  }
 }
