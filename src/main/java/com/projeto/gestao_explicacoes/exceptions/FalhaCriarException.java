@@ -10,3 +10,4 @@ public class FalhaCriarException extends RuntimeException {
         super(message);
     }
 }
+

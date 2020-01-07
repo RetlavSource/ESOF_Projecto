@@ -24,7 +24,8 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @Autowired
-    public AlunoController(AlunoService alunoService) {
+    public AlunoController(AlunoService alunoService){
+
         this.alunoService = alunoService;
     }
 
@@ -53,11 +54,13 @@ public class AlunoController {
         this.logger.info("Recebido um pedido POST");
 
         Optional<Aluno> criadoAluno = this.alunoService.criarAluno(aluno);
-        
-        if (criadoAluno.isEmpty()){
-            throw new FalhaCriarException("O aluno com o nome: " + aluno.getNome() + " ja existe!");
+
+        if(criadoAluno.isPresent()){
+
+            return ResponseEntity.ok(criadoAluno.get());
         }
-        return ResponseEntity.ok(criadoAluno.get());
+
+        throw new FalhaCriarException("O aluno com o nome: " + aluno.getNome() + " ja existe!");
     }
 
 

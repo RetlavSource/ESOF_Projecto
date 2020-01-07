@@ -1,6 +1,6 @@
 package com.projeto.gestao_explicacoes.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,19 +21,23 @@ public class Explicador extends BaseModel{
   private Integer numero;
 
   @OneToMany(mappedBy = "explicador", cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Horario> horarios = new HashSet<>();
 
   @ManyToMany(mappedBy = "explicadores" , cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Idioma> idiomas = new HashSet<>(); // tabela criada automaticamente
 
   @OneToMany(mappedBy = "explicador", cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   @ManyToMany(mappedBy = "explicadores", cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Cadeira> cadeiras = new HashSet<>();
 
   // ****** METHODS ******

@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.models.builders;
 
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.*;
 
 import java.util.HashSet;
@@ -64,8 +65,19 @@ public class ExplicadorBuilder {
         return this;
     }
 
-    public Explicador build() {
+    public Explicador build() throws FalhaCriarException{
+
         Explicador explicador = new Explicador(nome, numero, horarios, idiomas, atendimentos, cadeiras);
+
+        if(nome == null){
+
+            throw new FalhaCriarException("Argumento nome inválido ou inexistente!!");
+        }
+
+        if(numero == null){
+
+            throw new FalhaCriarException("Argumento numero inválido ou inexistente!!");
+        }
 
         if (horarios != null) {
             for (Horario horario: this.horarios) {
