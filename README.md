@@ -5,16 +5,16 @@
 Este é um projeto prático para a disciplina de  ***Engenharia de Software*** na ***Universidade Fernando Pessoa***.
 
 ## Endpoints utilizados
-* **GET**
-  * /cadeira -- *`lista todas as cadeiras`*
-  * /cadeira/1 -- *`lista a cadeira com o id=1`*
-  * /atendimento -- *`lista todos os atendimentos`*
-  * /atendimento/1 -- *`lista o atendimento com o id=1`*
+*   **GET**
+    *   /cadeira -- *`lista todas as cadeiras`*
+    *   /cadeira/1 -- *`lista a cadeira com o id=1`*
+    *   /atendimento -- *`lista todos os atendimentos`*
+    *   /atendimento/1 -- *`lista o atendimento com o id=1`*
 
-* **POST**
-  * /cadeira -- *`cria uma cadeira`*
-  * /cadeira/1 -- *`cria uma cadeira no curso com o id=1`*
-  * /atendimento -- *`cria um atendimento`*
+*   **POST**
+    * /cadeira -- *`cria uma cadeira`*
+    * /cadeira/1 -- *`cria uma cadeira no curso com o id=1`*
+    * /atendimento -- *`cria um atendimento`*
 * **PUT**
   * /cadeira/1 -- *`modifica a cadeira com o id=1`*
   * /atendimento/1 -- *`modifica o atendimento com o id=1`*
