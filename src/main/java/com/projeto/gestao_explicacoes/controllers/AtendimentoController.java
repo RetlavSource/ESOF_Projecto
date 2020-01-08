@@ -6,11 +6,13 @@ import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.Atend
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Controller
@@ -34,16 +36,17 @@ public class AtendimentoController {
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Atendimento> createAtendimento(@RequestBody Atendimento atendimento) {
+    public ResponseEntity<AtendimentoObject> createAtendimento(@RequestBody AtendimentoObject objatendimento) {
         this.logger.info("Recebido um pedido POST");
 
 
-        System.out.println(atendimento.getData());
-        System.out.println(atendimento.getAluno());
-        System.out.println(atendimento.getCadeira());
-        System.out.println(atendimento.getExplicador());
-        System.out.println(atendimento.getIdioma());
+        System.out.println(objatendimento.getData());
+        System.out.println(objatendimento.getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        System.out.println(objatendimento.getNomeExplicador());
+        System.out.println(objatendimento.getNomeAluno());
+        System.out.println(objatendimento.getNomeCadeira());
+        System.out.println(objatendimento.getNomeIdioma());
 
-        return ResponseEntity.ok(atendimento);
+        return ResponseEntity.ok(objatendimento);
     }
 }
