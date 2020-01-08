@@ -1,7 +1,6 @@
 package com.projeto.gestao_explicacoes.services.cursoServices;
 
 import com.projeto.gestao_explicacoes.models.Curso;
-import com.projeto.gestao_explicacoes.models.Faculdade;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,7 @@ public class CursoServiceInMemory implements CursoService {
     }
 
     @Override
-    public Optional<Curso> criarCursoFaculdade(Curso curso, Faculdade faculdade) {
-
+    public Optional<Curso> criarCursoFaculdade(Curso curso, String nomeFaculdade) {
         return Optional.empty();
     }
 }

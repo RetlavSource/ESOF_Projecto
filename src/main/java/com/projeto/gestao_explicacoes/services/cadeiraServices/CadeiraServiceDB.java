@@ -4,6 +4,8 @@ import com.projeto.gestao_explicacoes.models.Cadeira;
 import com.projeto.gestao_explicacoes.models.Curso;
 import com.projeto.gestao_explicacoes.repositories.CadeiraRepo;
 import com.projeto.gestao_explicacoes.repositories.CursoRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Service
 @Profile(value = "db")
 public class CadeiraServiceDB implements CadeiraService {
+
+    private Logger logger= LoggerFactory.getLogger(this.getClass());
 
     private CadeiraRepo cadeiraRepo;
     private CursoRepo cursoRepo;
@@ -37,9 +41,10 @@ public class CadeiraServiceDB implements CadeiraService {
 
     //Cadeira tem que estar obrigatoriamente associada a um curso na sua criacao
     @Override
-    public Optional<Cadeira> criarCadeiraCurso(Cadeira cadeira, Curso curso) {
+    public Optional<Cadeira> criarCadeiraCurso(Cadeira cadeira, String nomeCurso) {
+        this.logger.info("No método: CadeiraServiceDB -> criarCadeiraCurso");
 
-        Optional<Curso> cursoOptional = this.cursoRepo.findByNome(curso.getNome());
+        Optional<Curso> cursoOptional = this.cursoRepo.findByNome(nomeCurso);
 
         if (cursoOptional.isPresent()) {
             for (Cadeira cadeiraAux : cursoOptional.get().getCadeiras()) {
@@ -49,7 +54,7 @@ public class CadeiraServiceDB implements CadeiraService {
             }
 
             cursoOptional.get().addCadeira(cadeira);
-            this.cursoRepo.save(cursoOptional.get());
+            this.cadeiraRepo.save(cadeira);
             return Optional.of(cadeira);
         }
 
