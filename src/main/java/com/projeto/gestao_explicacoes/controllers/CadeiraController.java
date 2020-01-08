@@ -52,7 +52,7 @@ public class CadeiraController {
      }
      */
     @PostMapping(value = "/{curso}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cadeira> createCursoInFaculdade(@RequestBody Cadeira cadeira, @PathVariable("curso") Curso curso){
+    public ResponseEntity<Cadeira> createCadeiraInCurso(@RequestBody Cadeira cadeira, @PathVariable("curso") Curso curso){
 
         this.logger.info("Recebido um pedido POST");
 
