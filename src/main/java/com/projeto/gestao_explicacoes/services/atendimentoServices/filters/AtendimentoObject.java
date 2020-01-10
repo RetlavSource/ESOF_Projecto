@@ -1,7 +1,6 @@
 package com.projeto.gestao_explicacoes.services.atendimentoServices.filters;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,4 +26,12 @@ public class AtendimentoObject {
     private String siglaCadeira;
     private String nomeIdioma;
     private String siglaIdioma;
+
+    public AtendimentoObject(LocalDateTime data, String nomeExplicador, String nomeAluno, String nomeCadeira, String nomeIdioma) {
+        this.data = data;
+        this.nomeExplicador = nomeExplicador;
+        this.nomeAluno = nomeAluno;
+        this.nomeCadeira = nomeCadeira;
+        this.nomeIdioma = nomeIdioma;
+    }
 }
