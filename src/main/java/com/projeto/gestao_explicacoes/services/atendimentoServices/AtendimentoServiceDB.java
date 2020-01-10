@@ -2,11 +2,13 @@ package com.projeto.gestao_explicacoes.services.atendimentoServices;
 
 import com.projeto.gestao_explicacoes.models.Atendimento;
 import com.projeto.gestao_explicacoes.repositories.AtendimentoRepo;
+import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -27,5 +29,11 @@ public class AtendimentoServiceDB implements AtendimentoService {
             atendimentos.add(atendimento);
         }
         return atendimentos;
+    }
+
+    @Override
+    public Optional<AtendimentoObject> criarAtendimento(AtendimentoObject objAtendimento) {
+
+        return Optional.empty();
     }
 }

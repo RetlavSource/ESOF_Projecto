@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.controllers;
 
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Atendimento;
 import com.projeto.gestao_explicacoes.services.atendimentoServices.AtendimentoService;
 import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoObject;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -39,6 +41,7 @@ public class AtendimentoController {
     public ResponseEntity<AtendimentoObject> createAtendimento(@RequestBody AtendimentoObject objatendimento) {
         this.logger.info("Recebido um pedido POST");
 
+        Optional<AtendimentoObject> criadoAtendimento = this.atendimentoService.criarAtendimento(objatendimento);
 
         System.out.println(objatendimento.getData());
         System.out.println(objatendimento.getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
@@ -47,6 +50,13 @@ public class AtendimentoController {
         System.out.println(objatendimento.getNomeCadeira());
         System.out.println(objatendimento.getNomeIdioma());
 
-        return ResponseEntity.ok(objatendimento);
+        //return ResponseEntity.ok(objatendimento);
+
+        if(criadoAtendimento.isPresent()){
+
+            return ResponseEntity.ok(criadoAtendimento.get());
+        }
+
+        throw new FalhaCriarException("O atendimento entre o explicador " + objatendimento.getNomeExplicador() + " e o aluno " + objatendimento.getNomeAluno() + " na data " + objatendimento.getData() + " nao foi criado com sucesso!");
     }
 }

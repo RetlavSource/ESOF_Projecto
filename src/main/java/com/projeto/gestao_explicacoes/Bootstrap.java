@@ -83,7 +83,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         mapping.put("UP","http://localhost:8081");
 
 
-        //
+
         String uni="UFP";
         StringBuilder sb=new StringBuilder();
 
