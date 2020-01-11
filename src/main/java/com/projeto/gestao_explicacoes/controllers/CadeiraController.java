@@ -52,18 +52,16 @@ public class CadeiraController {
      }
      */
     @PostMapping(value = "/{curso}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cadeira> createCadeiraInCurso(@RequestBody Cadeira cadeira, @PathVariable("curso") Curso curso){
-
+    public ResponseEntity<Cadeira> createCadeiraInCurso(@RequestBody Cadeira cadeira, @PathVariable("curso") String nomeCurso){
         this.logger.info("Recebido um pedido POST");
 
-        Optional<Cadeira> criadaCadeiraFaculdade = this.cadeiraService.criarCadeiraCurso(cadeira,curso);
+        Optional<Cadeira> criadaCadeiraCurso = this.cadeiraService.criarCadeiraCurso(cadeira,nomeCurso);
 
-        if(criadaCadeiraFaculdade.isPresent()){
-
-            return ResponseEntity.ok(criadaCadeiraFaculdade.get());
+        if(criadaCadeiraCurso.isPresent()){
+            return ResponseEntity.ok(criadaCadeiraCurso.get());
         }
 
-        throw new FalhaCriarException("A cadeira de: " + cadeira.getNome() + " nao foi criado com sucesso na curso de: " + curso.getNome() + "!");
+        throw new FalhaCriarException("A cadeira de: " + cadeira.getNome() + " nao foi criado com sucesso no curso de: " + nomeCurso + "!");
     }
 
 }

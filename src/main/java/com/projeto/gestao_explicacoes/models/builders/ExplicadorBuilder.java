@@ -69,35 +69,33 @@ public class ExplicadorBuilder {
 
         Explicador explicador = new Explicador(nome, numero, horarios, idiomas, atendimentos, cadeiras);
 
-        if(nome == null){
-
+        if(nome == null || nome.isEmpty() || nome.isBlank()){
             throw new FalhaCriarException("Argumento nome inválido ou inexistente!!");
         }
 
-        if(numero == null){
-
+        if(numero == null || numero == 0){
             throw new FalhaCriarException("Argumento numero inválido ou inexistente!!");
         }
 
-        if (horarios != null) {
+        if ( horarios != null || !horarios.isEmpty() ) {
             for (Horario horario: this.horarios) {
                 horario.setExplicador(explicador);
             }
         }
 
-        if (idiomas != null) {
+        if ( idiomas != null || !idiomas.isEmpty() ) {
             for (Idioma idioma: this.idiomas) {
                 idioma.getExplicadores().add(explicador);
             }
         }
 
-        if (atendimentos != null) {
+        if ( atendimentos != null || !atendimentos.isEmpty() ) {
             for (Atendimento atendimento : this.atendimentos) {
                 atendimento.setExplicador(explicador);
             }
         }
 
-        if (cadeiras != null) {
+        if ( cadeiras != null || !cadeiras.isEmpty() ) {
             for (Cadeira cadeira: this.cadeiras) {
                 cadeira.getExplicadores().add(explicador);
             }

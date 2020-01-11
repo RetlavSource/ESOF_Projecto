@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Component
@@ -51,6 +51,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         logger.info("Startup");
 
         //exemploEntradas();
+        //testStringBuilder();
         novosDados();
     }
 
@@ -73,6 +74,23 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         // Para introdução de Idiomas (Idioma em UpperCase)
         String idioma = "português";
         System.out.println(idioma.toUpperCase());
+    }
+
+    private void testStringBuilder() {
+
+        Map<String,String> mapping=new HashMap<>();
+        mapping.put("UFP","http://localhost:8080");
+        mapping.put("UP","http://localhost:8081");
+
+
+
+        String uni="UFP";
+        StringBuilder sb=new StringBuilder();
+
+        sb.append(mapping.get(uni)).append("/explicador");
+
+        System.out.println(sb.toString());
+
     }
 
     private void novosDados(){
@@ -169,20 +187,22 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .addIdioma(portugues)
                 .addIdioma(inglesUk)
                 .addHorario(new Horario(DayOfWeek.MONDAY,
-                        LocalTime.of(13, 00, 00),
-                        LocalTime.of(17, 00, 00)))
+                        LocalTime.of(13, 0),
+                        LocalTime.of(17, 0)))
                 .addHorario(new Horario(DayOfWeek.WEDNESDAY,
-                        LocalTime.of(9, 00, 00),
-                        LocalTime.of(12, 00, 00)))
+                        LocalTime.of(9, 0),
+                        LocalTime.of(12, 0)))
                 .build();
+
+
 
         Explicador feliz = new ExplicadorBuilder().setNome("Feliz Gouveia").setNumero(11211)
                 .addCadeira(esof)
                 .addIdioma(portugues)
                 .addIdioma(inglesUk)
                 .addHorario(new Horario(DayOfWeek.WEDNESDAY,
-                        LocalTime.of(17, 00, 00),
-                        LocalTime.of(20, 00, 00)))
+                        LocalTime.of(17, 0),
+                        LocalTime.of(20, 0)))
                 .build();
 
         Explicador jobs = new ExplicadorBuilder().setNome("Steve Jobs").setNumero(1333)
@@ -214,7 +234,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .addIdioma(coreano).build();
 
         Atendimento valAtendimento = new AtendimentoBuilder()
-                .setData(LocalDateTime.parse("2019-12-30T13:00:00"))
+                .setData(LocalDateTime.parse("2019-12-30T13:00"))
                 .setAluno(valter)
                 .setCadeira(esof)
                 .setIdioma(portugues)
@@ -222,7 +242,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Atendimento gustAtendimento = new AtendimentoBuilder()
-                .setData(LocalDateTime.parse("2020-01-01T11:00:00"))
+                .setData(LocalDateTime.parse("2020-01-01T11:00"))
                 .setAluno(gustavo)
                 .setCadeira(so)
                 .setIdioma(portuguesBr)

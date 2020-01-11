@@ -54,14 +54,7 @@ public class AlunoController {
         this.logger.info("Recebido um pedido POST");
 
         Optional<Aluno> criadoAluno = this.alunoService.criarAluno(aluno);
-        
-        /*if (criadoAluno.isEmpty()){
-            throw new FalhaCriarException("O aluno com o nome: " + aluno.getNome() + " ja existe!");
-        }
-        else {
 
-            return ResponseEntity.ok(criadoAluno.get());
-        }*/
         if(criadoAluno.isPresent()){
 
             return ResponseEntity.ok(criadoAluno.get());
