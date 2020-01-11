@@ -92,8 +92,6 @@ public class AtendimentoServiceDB implements AtendimentoService {
         for (Horario horario: explicadorAux.getHorarios()){
             this.logger.info("Horario OK!");
 
-            System.out.println(horario.getDiaSemana());
-            System.out.println(objAtendimento.getData().getDayOfWeek());
             if (horario.getDiaSemana().equals(objAtendimento.getData().getDayOfWeek())) {
                 this.logger.info("Dia semana OK!");
 
@@ -122,7 +120,6 @@ public class AtendimentoServiceDB implements AtendimentoService {
                 }
             }
         }
-
 
 
         return Optional.empty();

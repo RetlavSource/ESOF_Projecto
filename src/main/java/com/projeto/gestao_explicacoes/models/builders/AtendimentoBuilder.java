@@ -42,30 +42,30 @@ public class AtendimentoBuilder {
     public Atendimento build() throws FalhaCriarException {
         Atendimento atendimento = new Atendimento(data);
 
-        if (data == null) {
+        if (data == null ) {
             throw new FalhaCriarException("Argumento data inválido ou inexistente!!");
         }
 
-        if (this.explicador != null) {
+        if ( this.explicador != null ) {
             this.explicador.addAtendimento(atendimento);
         }else{
             throw new FalhaCriarException("Argumento explicador inválido ou inexistente!!");
         }
 
 
-        if (this.aluno != null) {
+        if ( this.aluno != null ) {
             this.aluno.addAtendimento(atendimento);
         } else {
             throw new FalhaCriarException("Argumento aluno inválido ou inexistente!!");
         }
 
-        if (this.cadeira != null) {
+        if ( this.cadeira != null ) {
             this.cadeira.addAtendimento(atendimento);
         } else {
             throw new FalhaCriarException("Argumento cadeira inválido ou inexistente!!");
         }
 
-        if (this.idioma != null) {
+        if ( this.idioma != null ) {
             this.idioma.addAtendimento(atendimento);
         } else {
             throw new FalhaCriarException("Argumento idioma inválido ou inexistente!!");

@@ -43,17 +43,8 @@ public class AtendimentoController {
 
         Optional<AtendimentoObject> criadoAtendimento = this.atendimentoService.criarAtendimento(objatendimento);
 
-        System.out.println(objatendimento.getData());
-        System.out.println(objatendimento.getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
-        System.out.println(objatendimento.getNomeExplicador());
-        System.out.println(objatendimento.getNomeAluno());
-        System.out.println(objatendimento.getNomeCadeira());
-        System.out.println(objatendimento.getNomeIdioma());
-
-        //return ResponseEntity.ok(objatendimento);
 
         if(criadoAtendimento.isPresent()){
-
             return ResponseEntity.ok(criadoAtendimento.get());
         }
 
