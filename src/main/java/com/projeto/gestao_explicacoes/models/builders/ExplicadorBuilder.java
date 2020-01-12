@@ -41,7 +41,7 @@ public class ExplicadorBuilder {
     }
 
     public ExplicadorBuilder addIdioma(Idioma idioma) {
-        this.idiomas.add(idioma);
+        this.idiomas.add(new Idioma(idioma.getNome(), idioma.getSigla()));
         return this;
     }
 

@@ -1,6 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,19 +25,29 @@ public class Idioma extends BaseModel{
   private String sigla; // Sigla em UpperCase
 
   @OneToMany(mappedBy = "idioma", cascade = CascadeType.PERSIST)
-  @JsonManagedReference
+  //@JsonManagedReference
+  @JsonIgnore
   private Set<Atendimento> atendimentos = new HashSet<>();
 
   @ManyToMany(cascade = CascadeType.PERSIST)
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
-  @JsonBackReference
+  //@JsonBackReference
+  @JsonIgnore
   private Set<Explicador> explicadores = new HashSet<>();
 
   // ****** METHODS ******
 
   public Idioma(String nome, String sigla) {
     this.nome = nome.toUpperCase();
+    this.sigla = sigla.toUpperCase();
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome.toUpperCase();
+  }
+
+  public void setSigla(String sigla) {
     this.sigla = sigla.toUpperCase();
   }
 

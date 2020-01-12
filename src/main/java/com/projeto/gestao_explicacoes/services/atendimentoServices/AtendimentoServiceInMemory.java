@@ -1,7 +1,7 @@
 package com.projeto.gestao_explicacoes.services.atendimentoServices;
 
 import com.projeto.gestao_explicacoes.models.Atendimento;
-import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoObject;
+import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoDTO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class AtendimentoServiceInMemory implements AtendimentoService {
     }
 
     @Override
-    public Optional<AtendimentoObject> criarAtendimento(AtendimentoObject objAtendimento) {
+    public Optional<AtendimentoDTO> criarAtendimento(AtendimentoDTO objAtendimento) {
 
         return Optional.empty();
     }

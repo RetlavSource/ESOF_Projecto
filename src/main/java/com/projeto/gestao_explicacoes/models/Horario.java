@@ -1,6 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +25,8 @@ public class Horario extends BaseModel{
   @ManyToOne
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
-  @JsonBackReference
+  //@JsonBackReference
+  @JsonIgnore
   private Explicador explicador; // adicionado em "Explicador"
 
   // ****** METHODS ******

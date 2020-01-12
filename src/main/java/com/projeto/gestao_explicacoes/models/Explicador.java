@@ -61,6 +61,24 @@ public class Explicador extends BaseModel{
     horario.setExplicador(null);
   }
 
+  /**
+   * Verifica a existencia do @param horario na colecção
+   * @param horario
+   * @return true se existir e false se não
+   */
+  public boolean containsHorario(Horario horario) {
+    for (Horario auxHorario: this.horarios) {
+      if (auxHorario.getDiaSemana().equals(horario.getDiaSemana())) {
+        if (auxHorario.getHoraInicio().equals(horario.getHoraInicio())) {
+          if (auxHorario.getHoraFim().equals(horario.getHoraFim())) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   public void addIdioma(Idioma idioma){
     this.idiomas.add(idioma);
     idioma.getExplicadores().add(this);
@@ -69,6 +87,22 @@ public class Explicador extends BaseModel{
   public void removeIdioma(Idioma idioma){
     this.idiomas.remove(idioma);
     idioma.getExplicadores().remove(this);
+  }
+
+  /**
+   * Verifica a existencia do @param idioma na colecção
+   * @param idioma
+   * @return true se existir e false se não
+   */
+  public boolean containsIdioma(Idioma idioma) {
+    for (Idioma auxIdioma: this.idiomas) {
+      if (auxIdioma.getNome().equals(idioma.getNome().toUpperCase())) {
+        if (auxIdioma.getSigla().equals(idioma.getSigla().toUpperCase())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public void addAtendimento(Atendimento atendimento){
@@ -81,6 +115,20 @@ public class Explicador extends BaseModel{
     atendimento.setExplicador(null);
   }
 
+  /**
+   * Verifica a existencia do @param atendimento na colecção
+   * @param atendimento
+   * @return true se existir e false se não
+   */
+  public boolean containsAtendimento(Atendimento atendimento) {
+    for (Atendimento auxAtendimento : this.atendimentos) {
+      if (auxAtendimento.getData().equals(atendimento.getData())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public void addCadeira(Cadeira cadeira) {
     this.cadeiras.add(cadeira);
     cadeira.getExplicadores().add(this);
@@ -89,5 +137,21 @@ public class Explicador extends BaseModel{
   public void removeCadeira(Cadeira cadeira) {
     this.cadeiras.remove(cadeira);
     cadeira.getExplicadores().remove(this);
+  }
+
+  /**
+   * Verifica a existencia do @param cadeira na colecção
+   * @param cadeira
+   * @return true se existir e false se não
+   */
+  public boolean containsCadeira(Cadeira cadeira) {
+    for (Cadeira auxCadeira : this.cadeiras) {
+      if (auxCadeira.getNome().equals(cadeira.getNome())) {
+        if (auxCadeira.getSigla().equals(cadeira.getSigla())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

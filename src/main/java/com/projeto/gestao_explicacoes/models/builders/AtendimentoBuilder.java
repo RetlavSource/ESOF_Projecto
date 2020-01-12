@@ -35,7 +35,7 @@ public class AtendimentoBuilder {
     }
 
     public AtendimentoBuilder setIdioma(Idioma idioma) {
-        this.idioma = idioma;
+        this.idioma = new Idioma(idioma.getNome(), idioma.getSigla());
         return this;
     }
 
