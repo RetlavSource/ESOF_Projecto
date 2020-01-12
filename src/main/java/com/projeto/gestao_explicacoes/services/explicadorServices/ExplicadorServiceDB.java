@@ -4,6 +4,8 @@ import com.projeto.gestao_explicacoes.models.*;
 import com.projeto.gestao_explicacoes.models.builders.ExplicadorBuilder;
 import com.projeto.gestao_explicacoes.repositories.*;
 import com.projeto.gestao_explicacoes.services.explicadorServices.filters.ExplicadorDTO;
+import com.projeto.gestao_explicacoes.services.explicadorServices.filters.FilterExplicadorService;
+import com.projeto.gestao_explicacoes.services.explicadorServices.filters.FilterObjectExplicador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,16 @@ public class ExplicadorServiceDB implements ExplicadorService {
     private IdiomaRepo idiomaRepo;
     private AtendimentoRepo atendimentoRepo;
     private CadeiraRepo cadeiraRepo;
+    private FilterExplicadorService filterExplicadorService;
 
     @Autowired
-    public ExplicadorServiceDB(ExplicadorRepo explicadorRepo, HorarioRepo horarioRepo, IdiomaRepo idiomaRepo, AtendimentoRepo atendimentoRepo, CadeiraRepo cadeiraRepo) {
+    public ExplicadorServiceDB(ExplicadorRepo explicadorRepo, HorarioRepo horarioRepo, IdiomaRepo idiomaRepo, AtendimentoRepo atendimentoRepo, CadeiraRepo cadeiraRepo, FilterExplicadorService filterExplicadorService) {
         this.explicadorRepo = explicadorRepo;
         this.horarioRepo = horarioRepo;
         this.idiomaRepo = idiomaRepo;
         this.atendimentoRepo = atendimentoRepo;
         this.cadeiraRepo = cadeiraRepo;
+        this.filterExplicadorService = filterExplicadorService;
     }
 
     @Override
@@ -158,6 +162,15 @@ public class ExplicadorServiceDB implements ExplicadorService {
                 explicador.getIdiomas(),
                 explicador.getAtendimentos(),
                 explicador.getCadeiras()));
+    }
+
+    @Override
+    public Set<Explicador> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
+        this.logger.info("No método: ExplicadorServiceDB -> procuraExplicadores");
+
+        Set<Explicador> todosExplicadores = this.findAll();
+
+        return this.filterExplicadorService.preFilter(todosExplicadores, filterObjectExplicador);
     }
 
 }
