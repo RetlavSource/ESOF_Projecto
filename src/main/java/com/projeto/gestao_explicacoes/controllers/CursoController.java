@@ -2,7 +2,6 @@ package com.projeto.gestao_explicacoes.controllers;
 
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Curso;
-import com.projeto.gestao_explicacoes.models.Faculdade;
 import com.projeto.gestao_explicacoes.services.cursoServices.CursoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +24,6 @@ public class CursoController {
 
     @Autowired
     public CursoController(CursoService cursoService) {
-
         this.cursoService = cursoService;
     }
 
@@ -51,17 +49,15 @@ public class CursoController {
      }
      */
     @PostMapping(value = "/{faculdade}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("faculdade") Faculdade faculdade){
-
+    public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("faculdade") String nomeFaculdade){
         this.logger.info("Recebido um pedido POST");
 
-        Optional<Curso> criadoCursoFaculdade = this.cursoService.criarCursoFaculdade(curso,faculdade);
+        Optional<Curso> criadoCursoFaculdade = this.cursoService.criarCursoFaculdade(curso,nomeFaculdade);
 
         if(criadoCursoFaculdade.isPresent()){
-
             return ResponseEntity.ok(criadoCursoFaculdade.get());
         }
 
-        throw new FalhaCriarException("O curso de: " + curso.getNome() + " nao foi criado com sucesso na faculdade de: " + faculdade.getNome() + "!");
+        throw new FalhaCriarException("O curso de: " + curso.getNome() + " nao foi criado com sucesso na faculdade de: " + nomeFaculdade + "!");
     }
 }

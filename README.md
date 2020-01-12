@@ -10,19 +10,24 @@ Este é um projeto prático para a disciplina de  ***Engenharia de Software*** n
     *   /cadeira/1 -- *`lista a cadeira com o id=1`*
     *   /atendimento -- *`lista todos os atendimentos`*
     *   /atendimento/1 -- *`lista o atendimento com o id=1`*
+    *   /curso -- *`lista todos os cursos`*
+    *   /curso/1 -- *`lista o curso com o id=1`*
 
 *   **POST**
     *   /cadeira -- *`cria uma cadeira`*
-    *   /cadeira/1 -- *`cria uma cadeira no curso com o id=1`*
+    *   /cadeira/{curso} -- *`cria uma cadeira no curso com o id={curso} ou nome={curso}`*
     *   /atendimento -- *`cria um atendimento`*
+    *   /curso/{faculdade} -- *`cria um curso na faculdade com id={faculdade} ou nome={faculdade}`*
 
 *   **PUT**
     *   /cadeira/1 -- *`modifica a cadeira com o id=1`*
     *   /atendimento/1 -- *`modifica o atendimento com o id=1`*
+    *   /curso/1 -- *`modifica o curso com o id=1`*
     
 *   **DELETE**
     *   /cadeira/1 -- *`remove a cadeira com o id=1`*
     *   /atendimento/1 -- *`remove o atendimento com o id=1`*
+    *   /curso/1 -- *`remove o curso com o id=1`*
 
 ## Documentação de referência
 Documentação utilizada na realização do projeto:

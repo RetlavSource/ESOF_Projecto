@@ -1,14 +1,13 @@
 package com.projeto.gestao_explicacoes.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -18,7 +17,7 @@ public class Curso extends BaseModel{
 
   private String nome;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   //@JsonBackReference
@@ -26,11 +25,13 @@ public class Curso extends BaseModel{
   private Faculdade faculdade; // adicionado em "Faculdade"
 
   @OneToMany(mappedBy = "curso", cascade = CascadeType.PERSIST)
+  @ToString.Exclude
   //@JsonManagedReference
   @JsonIgnore
   private Set<Cadeira> cadeiras = new HashSet<>();
 
   @OneToMany(mappedBy = "curso", cascade = CascadeType.PERSIST)
+  @ToString.Exclude
   //@JsonManagedReference
   @JsonIgnore
   private Set<Aluno>  alunos = new HashSet<>();
@@ -59,6 +60,18 @@ public class Curso extends BaseModel{
   public void removeAluno(Aluno aluno){
     this.alunos.remove(aluno);
     aluno.setCurso(null);
+  }
+
+  @ToString.Include
+  @JsonProperty // mais genérico, mas pode ser utilizado também @JsonGetter
+  public ArrayList<String> cadeiras() {
+    ArrayList<String> nomeCadeiras = new ArrayList<>();
+
+    for (Cadeira cadeira : this.cadeiras) {
+      nomeCadeiras.add(cadeira.getNome());
+    }
+
+    return nomeCadeiras;
   }
 
 }

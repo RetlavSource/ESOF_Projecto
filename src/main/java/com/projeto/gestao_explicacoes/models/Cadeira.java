@@ -1,6 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class Cadeira extends BaseModel{
   private String nome;
   private String sigla;
 
-  @ManyToOne
+  @ManyToOne (cascade =  CascadeType.PERSIST)
   @ToString.Exclude
   //@JsonBackReference
   @JsonIgnore
@@ -35,6 +36,7 @@ public class Cadeira extends BaseModel{
   private Set<Explicador> explicadores = new HashSet<>(); // adicionado em "Explicador"
 
   @OneToMany(mappedBy = "cadeira", cascade = CascadeType.PERSIST)
+  @ToString.Exclude
   //@JsonManagedReference
   @JsonIgnore
   private Set<Atendimento> atendimentos = new HashSet<>();
@@ -57,6 +59,7 @@ public class Cadeira extends BaseModel{
   }
 
   @ToString.Include
+  @JsonProperty
   public ArrayList<String> explicadores() {
     ArrayList<String> nomeExplicadores = new ArrayList<>();
 
