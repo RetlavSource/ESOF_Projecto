@@ -50,9 +50,17 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         logger.info("Startup");
 
+        //allTestes();
         //exemploEntradas();
         //testStringBuilder();
         novosDados();
+    }
+
+    private void allTestes() {
+
+        // Testes rápidos:
+
+
     }
 
     private void exemploEntradas(){

@@ -43,7 +43,6 @@ public class AtendimentoController {
 
         Optional<AtendimentoObject> criadoAtendimento = this.atendimentoService.criarAtendimento(objatendimento);
 
-
         if(criadoAtendimento.isPresent()){
             return ResponseEntity.ok(criadoAtendimento.get());
         }

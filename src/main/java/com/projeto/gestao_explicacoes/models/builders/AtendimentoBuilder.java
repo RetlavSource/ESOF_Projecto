@@ -42,7 +42,7 @@ public class AtendimentoBuilder {
     public Atendimento build() throws FalhaCriarException {
         Atendimento atendimento = new Atendimento(data);
 
-        if (data == null ) {
+        if ( data == null ) {
             throw new FalhaCriarException("Argumento data inválido ou inexistente!!");
         }
 

@@ -51,7 +51,6 @@ public class AtendimentoServiceDB implements AtendimentoService {
         Explicador explicadorAux = null;
         Cadeira cadeiraAux = null;
         Idioma idiomaAux = null;
-        Horario horarioAux = null;
 
         Optional<Aluno> aluno = this.alunoRepo.findByNome(objAtendimento.getNomeAluno());
         if (aluno.isEmpty()) {
@@ -120,7 +119,6 @@ public class AtendimentoServiceDB implements AtendimentoService {
                 }
             }
         }
-
 
         return Optional.empty();
     }
