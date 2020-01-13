@@ -81,7 +81,7 @@ public class ExplicadorController {
     }
 
     @GetMapping(value = "/procura", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Explicador>> procuraDisponibilidadeExplicador(@RequestParam Map<String, String> parametros) {
+    public ResponseEntity<Set<ExplicadorDTO>> procuraDisponibilidadeExplicador(@RequestParam Map<String, String> parametros) {
         this.logger.info("Recebido um pedido GET para /procura");
 
         String nomeCadeira = parametros.get("cadeira");
@@ -106,7 +106,7 @@ public class ExplicadorController {
         }
 
         FilterObjectExplicador filterObjectExplicador = new FilterObjectExplicador(nomeCadeira, nomeIdioma, dia, timeInit, timeEnd);
-        Set<Explicador> explicadoresDisponiveis = this.explicadorService.procuraExplicadores(filterObjectExplicador);
+        Set<ExplicadorDTO> explicadoresDisponiveis = this.explicadorService.procuraExplicadores(filterObjectExplicador);
         return ResponseEntity.ok(explicadoresDisponiveis);
     }
 
