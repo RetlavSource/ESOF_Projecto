@@ -93,7 +93,7 @@ public class ExplicadorController {
             nomeIdioma = nomeIdioma.toUpperCase();
         }
         DayOfWeek dia = null;
-        if (diaSemana != null) {
+        if (diaSemana != null && !diaSemana.isEmpty()) {
             dia = DayOfWeek.valueOf(diaSemana.toUpperCase());
         }
         LocalTime timeInit = null;
