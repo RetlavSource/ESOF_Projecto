@@ -1,44 +1,41 @@
 package com.projeto.gestao_explicacoes.services.explicadorServices.filters;
 
 import com.projeto.gestao_explicacoes.models.Explicador;
-import com.projeto.gestao_explicacoes.models.Horario;
+import com.projeto.gestao_explicacoes.models.Idioma;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExplicadorFilterHoraFim implements FilterExplicador {
+public class ExplicadorFilterNomeIdioma implements FilterExplicador {
 
     private Logger logger= LoggerFactory.getLogger(this.getClass());
 
-    private LocalTime horaFim;
+    private String nomeIdioma;
 
-    public ExplicadorFilterHoraFim(LocalTime horaFim) {
-        this.horaFim = horaFim;
+    public ExplicadorFilterNomeIdioma(String nomeIdioma) {
+        this.nomeIdioma = nomeIdioma;
     }
 
     @Override
     public Set<Explicador> filter(Set<Explicador> todosExplicadores) {
 
-        this.logger.info("No método: ExplicadorFilterHoraFim -> filter");
+        this.logger.info("No método: ExplicadorFilterNomeIdioma -> filter");
 
-        if ( this.horaFim == null ) {
+        if ( this.nomeIdioma == null || this.nomeIdioma.isBlank() ) {
             return todosExplicadores;
         }
 
         Set<Explicador> explicadoresFiltrados = new HashSet<>();
         for (Explicador explicador : todosExplicadores) {
-            for (Horario horario : explicador.getHorarios()) {
-                if ( horario != null && this.horaFim.getHour() <= horario.getHoraFim().getHour()
-                        && this.horaFim.getHour() >= horario.getHoraInicio().getHour() ) {
+            for (Idioma idioma : explicador.getIdiomas()) {
+                if ( idioma != null && idioma.getNome().equals(this.nomeIdioma) ) {
                     explicadoresFiltrados.add(explicador);
                     break;
                 }
             }
         }
-
 
         return explicadoresFiltrados;
     }
