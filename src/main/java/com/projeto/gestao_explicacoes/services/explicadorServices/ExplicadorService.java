@@ -17,5 +17,5 @@ public interface ExplicadorService {
 
     Optional<ExplicadorDTO> modificaExplicador(ExplicadorDTO infoExplicador);
 
-    Set<Explicador> procuraExplicadores(FilterObjectExplicador filterObjectExplicador);
+    Set<ExplicadorDTO> procuraExplicadores(FilterObjectExplicador filterObjectExplicador);
 }

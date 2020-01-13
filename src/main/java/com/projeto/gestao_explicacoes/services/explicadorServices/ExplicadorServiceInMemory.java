@@ -34,7 +34,7 @@ public class ExplicadorServiceInMemory implements ExplicadorService {
     }
 
     @Override
-    public Set<Explicador> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
+    public Set<ExplicadorDTO> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
         return null;
     }
 }

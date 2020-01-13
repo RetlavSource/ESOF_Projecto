@@ -1,6 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projeto.gestao_explicacoes.services.explicadorServices.filters.ExplicadorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -154,4 +155,18 @@ public class Explicador extends BaseModel{
     }
     return false;
   }
+
+  /**
+   * Permite copiar um objeto Explicador para um objeto ExplicadorDTO
+   * @return o objeto ExplicadorDTO criado
+   */
+  public ExplicadorDTO copyToExplicadorDTO() {
+    return new ExplicadorDTO(
+            this.getNome(),
+            this.getNumero(),
+            this.getHorarios(),
+            this.getIdiomas(),
+            this.getCadeiras());
+  }
+
 }

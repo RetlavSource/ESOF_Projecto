@@ -1,5 +1,6 @@
 package com.projeto.gestao_explicacoes.services.explicadorServices;
 
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.*;
 import com.projeto.gestao_explicacoes.models.builders.ExplicadorBuilder;
 import com.projeto.gestao_explicacoes.repositories.*;
@@ -165,12 +166,28 @@ public class ExplicadorServiceDB implements ExplicadorService {
     }
 
     @Override
-    public Set<Explicador> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
+    public Set<ExplicadorDTO> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
         this.logger.info("No método: ExplicadorServiceDB -> procuraExplicadores");
+
+        if (filterObjectExplicador.getHoraInicio().getMinute() != 0 || filterObjectExplicador.getHoraFim().getMinute() != 0 ) {
+            throw new FalhaCriarException("Só existem horas certas, logo os minutos tem de ser sempre 0!! Ex: 13:00 !!");
+        }
+
+        if ( filterObjectExplicador.getHoraInicio() != null && filterObjectExplicador.getHoraFim() != null ) {
+            if ( filterObjectExplicador.getHoraInicio().getHour() > filterObjectExplicador.getHoraFim().getHour() ) {
+                throw new FalhaCriarException("A Hora de Inicio não pode ser superior a Hora de Fim!!");
+            }
+        }
 
         Set<Explicador> todosExplicadores = this.findAll();
 
-        return this.filterExplicadorService.preFilter(todosExplicadores, filterObjectExplicador);
+        //return this.filterExplicadorService.preFilter(todosExplicadores, filterObjectExplicador);
+
+        Set<ExplicadorDTO> explicadorTransfer = new HashSet<>();
+        for (Explicador explicador : this.filterExplicadorService.preFilter(todosExplicadores, filterObjectExplicador)) {
+            explicadorTransfer.add(explicador.copyToExplicadorDTO());
+        }
+        return explicadorTransfer;
     }
 
 }
