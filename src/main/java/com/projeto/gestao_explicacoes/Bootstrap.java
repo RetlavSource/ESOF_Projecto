@@ -450,7 +450,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .addIdioma(coreano).build();
 
         Atendimento valAtendimento = new AtendimentoBuilder()
-                .setData(LocalDateTime.parse("2020-01-17T12:00"))
+                .setData(LocalDateTime.parse("2020-01-16T12:00"))
                 .setAluno(valter)
                 .setCadeira(esof)
                 .setIdioma(portugues)
@@ -458,7 +458,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Atendimento gustAtendimento = new AtendimentoBuilder()
-                .setData(LocalDateTime.parse("2020-01-20T18:00"))
+                .setData(LocalDateTime.parse("2020-01-20T13:00"))
                 .setAluno(gustavo)
                 .setCadeira(so)
                 .setIdioma(portuguesBr)
@@ -637,7 +637,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .addIdioma(coreano).build();
 
         Atendimento valAtendimento = new AtendimentoBuilder()
-                .setData(LocalDateTime.parse("2020-01-17T12:00"))
+                .setData(LocalDateTime.parse("2020-01-23T17:00"))
                 .setAluno(valter)
                 .setCadeira(esof)
                 .setIdioma(portugues)
@@ -645,7 +645,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Atendimento gustAtendimento = new AtendimentoBuilder()
-                .setData(LocalDateTime.parse("2020-01-20T18:00"))
+                .setData(LocalDateTime.parse("2020-01-27T11:00"))
                 .setAluno(gustavo)
                 .setCadeira(so)
                 .setIdioma(portuguesBr)
