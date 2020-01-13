@@ -12,8 +12,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class FilterObjectExplicador {
 
-    private String nomeCurso;
     private String nomeCadeira;
+    private String nomeIdioma;
     private DayOfWeek diaSemana;
     private LocalTime horaInicio;
     private LocalTime horaFim;

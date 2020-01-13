@@ -39,33 +39,6 @@ public class ExplicadorController {
         return ResponseEntity.ok(this.explicadorService.findAll());
     }
 
-    @GetMapping(value = "/procura", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Explicador>> procuraDisponibilidadeExplicador(@RequestParam Map<String, String> parametros) {
-        this.logger.info("Recebido um pedido GET para /procura");
-
-        String nomeCurso = parametros.get("nomeCurso");
-        String nomeCadeira = parametros.get("nomeCadeira");
-        String diaSemana = parametros.get("diaSemana");
-        String horaInicio = parametros.get("horaInicio");
-        String horaFim = parametros.get("horaFim");
-        DayOfWeek dia = null;
-        if (diaSemana != null) {
-            dia = DayOfWeek.valueOf(diaSemana.toUpperCase());
-        }
-        LocalTime timeInit = null;
-        LocalTime timeEnd = null;
-        if (horaInicio != null) {
-            timeInit = LocalTime.parse(horaInicio);
-        }
-        if (horaFim != null) {
-            timeEnd = LocalTime.parse(horaFim);
-        }
-
-        FilterObjectExplicador filterObjectExplicador = new FilterObjectExplicador(nomeCurso, nomeCadeira, dia, timeInit, timeEnd);
-        Set<Explicador> explicadoresDisponiveis = this.explicadorService.procuraExplicadores(filterObjectExplicador);
-        return ResponseEntity.ok(explicadoresDisponiveis);
-    }
-
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Explicador> createExplicador(@RequestBody Explicador explicador){
 
@@ -106,4 +79,35 @@ public class ExplicadorController {
 
         throw new FalhaCriarException("O explicador com o nome: " + nomeExplicador + " nao existe!");
     }
+
+    @GetMapping(value = "/procura", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<Explicador>> procuraDisponibilidadeExplicador(@RequestParam Map<String, String> parametros) {
+        this.logger.info("Recebido um pedido GET para /procura");
+
+        String nomeCadeira = parametros.get("cadeira");
+        String nomeIdioma = parametros.get("idioma");
+        String diaSemana = parametros.get("dia");
+        String horaInicio = parametros.get("inicio");
+        String horaFim = parametros.get("fim");
+        if (nomeIdioma != null) {
+            nomeIdioma = nomeIdioma.toUpperCase();
+        }
+        DayOfWeek dia = null;
+        if (diaSemana != null) {
+            dia = DayOfWeek.valueOf(diaSemana.toUpperCase());
+        }
+        LocalTime timeInit = null;
+        LocalTime timeEnd = null;
+        if (horaInicio != null) {
+            timeInit = LocalTime.parse(horaInicio);
+        }
+        if (horaFim != null) {
+            timeEnd = LocalTime.parse(horaFim);
+        }
+
+        FilterObjectExplicador filterObjectExplicador = new FilterObjectExplicador(nomeCadeira, nomeIdioma, dia, timeInit, timeEnd);
+        Set<Explicador> explicadoresDisponiveis = this.explicadorService.procuraExplicadores(filterObjectExplicador);
+        return ResponseEntity.ok(explicadoresDisponiveis);
+    }
+
 }
