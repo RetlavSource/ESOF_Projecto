@@ -18,4 +18,18 @@ public class FilterObjectExplicador {
     private LocalTime horaInicio;
     private LocalTime horaFim;
 
+    /**
+     * Verifica se o objeto não contem valores (está vazio)
+     *
+     * @return true caso esteja vazio, ou false caso não esteja
+     */
+    public boolean isEmpty() {
+        if (this.nomeCadeira == null || this.nomeCadeira.isBlank()) {
+            if (this.nomeIdioma == null || this.nomeIdioma.isBlank()) {
+                return this.diaSemana == null && this.horaInicio == null && this.horaFim == null;
+            }
+        }
+        return false;
+    }
+
 }
