@@ -169,6 +169,14 @@ public class ExplicadorServiceDB implements ExplicadorService {
     public Set<ExplicadorDTO> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
         this.logger.info("No método: ExplicadorServiceDB -> procuraExplicadores");
 
+        if (filterObjectExplicador.isEmpty()) {
+            Set<ExplicadorDTO> explicadorTransfer = new HashSet<>();
+            for (Explicador explicador : this.findAll()) {
+                explicadorTransfer.add(explicador.copyToExplicadorDTO());
+            }
+            return explicadorTransfer;
+        }
+
         if (filterObjectExplicador.getHoraInicio() != null) {
             if (filterObjectExplicador.getHoraInicio().getMinute() != 0) {
                 throw new FalhaCriarException("Só existem horas certas, logo os minutos tem de ser sempre 0!! Ex: 13:00 !!");
