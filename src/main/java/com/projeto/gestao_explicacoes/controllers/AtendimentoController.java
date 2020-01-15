@@ -3,17 +3,15 @@ package com.projeto.gestao_explicacoes.controllers;
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Atendimento;
 import com.projeto.gestao_explicacoes.services.atendimentoServices.AtendimentoService;
-import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoObject;
+import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,11 +36,10 @@ public class AtendimentoController {
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AtendimentoObject> createAtendimento(@RequestBody AtendimentoObject objatendimento) {
+    public ResponseEntity<AtendimentoDTO> createAtendimento(@RequestBody AtendimentoDTO objatendimento) {
         this.logger.info("Recebido um pedido POST");
 
-        Optional<AtendimentoObject> criadoAtendimento = this.atendimentoService.criarAtendimento(objatendimento);
-
+        Optional<AtendimentoDTO> criadoAtendimento = this.atendimentoService.criarAtendimento(objatendimento);
 
         if(criadoAtendimento.isPresent()){
             return ResponseEntity.ok(criadoAtendimento.get());

@@ -5,7 +5,7 @@ import com.projeto.gestao_explicacoes.models.builders.AtendimentoBuilder;
 import com.projeto.gestao_explicacoes.repositories.AlunoRepo;
 import com.projeto.gestao_explicacoes.repositories.AtendimentoRepo;
 import com.projeto.gestao_explicacoes.repositories.ExplicadorRepo;
-import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoObject;
+import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +44,13 @@ public class AtendimentoServiceDB implements AtendimentoService {
     }
 
     @Override
-    public Optional<AtendimentoObject> criarAtendimento(AtendimentoObject objAtendimento) {
+    public Optional<AtendimentoDTO> criarAtendimento(AtendimentoDTO objAtendimento) {
         this.logger.info("No método: AtendimentoServiceDB -> criarAtendimento");
 
         Aluno alunoAux = null;
         Explicador explicadorAux = null;
         Cadeira cadeiraAux = null;
         Idioma idiomaAux = null;
-        Horario horarioAux = null;
 
         Optional<Aluno> aluno = this.alunoRepo.findByNome(objAtendimento.getNomeAluno());
         if (aluno.isEmpty()) {
@@ -120,7 +119,6 @@ public class AtendimentoServiceDB implements AtendimentoService {
                 }
             }
         }
-
 
         return Optional.empty();
     }

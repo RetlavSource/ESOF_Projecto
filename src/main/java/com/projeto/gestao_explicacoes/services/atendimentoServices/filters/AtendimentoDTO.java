@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AtendimentoObject {
+public class AtendimentoDTO {
 
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -27,7 +27,7 @@ public class AtendimentoObject {
     private String nomeIdioma;
     private String siglaIdioma;
 
-    public AtendimentoObject(LocalDateTime data, String nomeExplicador, String nomeAluno, String nomeCadeira, String nomeIdioma) {
+    public AtendimentoDTO(LocalDateTime data, String nomeExplicador, String nomeAluno, String nomeCadeira, String nomeIdioma) {
         this.data = data;
         this.nomeExplicador = nomeExplicador;
         this.nomeAluno = nomeAluno;
