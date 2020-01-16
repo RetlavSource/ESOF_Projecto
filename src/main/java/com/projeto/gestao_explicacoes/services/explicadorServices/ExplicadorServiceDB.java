@@ -98,12 +98,7 @@ public class ExplicadorServiceDB implements ExplicadorService {
                     .setCadeiras(infoExplicador.getCadeiras())
                     .build();
             this.explicadorRepo.save(novoExplicador);
-            return Optional.of(new ExplicadorDTO(
-                    novoExplicador.getNome(),
-                    novoExplicador.getNumero(),
-                    novoExplicador.getHorarios(),
-                    novoExplicador.getIdiomas(),
-                    novoExplicador.getCadeiras()));
+            return Optional.of(novoExplicador.copyToExplicadorDTO());
         }
 
         this.logger.info("Atualizar explicador existente!");
