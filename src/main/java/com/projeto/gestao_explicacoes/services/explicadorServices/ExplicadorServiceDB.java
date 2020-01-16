@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.*;
 
 @Service
 @Profile(value = "db")
@@ -53,7 +53,6 @@ public class ExplicadorServiceDB implements ExplicadorService {
     public Optional<Explicador> criarExplicador(Explicador explicador) {
 
         if(this.explicadorRepo.findByNumero(explicador.getNumero()).isPresent()){
-
             return Optional.empty();
         }
 
@@ -166,8 +165,87 @@ public class ExplicadorServiceDB implements ExplicadorService {
     }
 
     @Override
-    public Set<ExplicadorDTO> procuraExplicadores(FilterObjectExplicador filterObjectExplicador) {
+    public Set<ExplicadorDTO> procuraExplicadores(Map<String, String> parametros) {
         this.logger.info("No método: ExplicadorServiceDB -> procuraExplicadores");
+
+        System.out.println(parametros);
+
+        for (Map.Entry<String, String> map : parametros.entrySet()) {
+            if (map.getValue().equals("null")) {
+                parametros.put(map.getKey(), "");
+            }
+        }
+
+        System.out.println(parametros);
+        System.out.println(parametros.isEmpty());
+        System.out.println(parametros.size());
+
+        String nomeCadeira = parametros.get("cadeira");
+        String nomeIdioma = parametros.get("idioma");
+        String diaSemana = parametros.get("dia");
+        String horaInicio = parametros.get("inicio");
+        String horaFim = parametros.get("fim");
+
+        System.out.println(nomeCadeira+nomeIdioma+diaSemana+horaInicio+horaFim);
+
+        if (nomeIdioma != null && !nomeIdioma.isBlank()) {
+            nomeIdioma = nomeIdioma.toUpperCase();
+        }
+
+        DayOfWeek dia = null;
+        if (diaSemana != null && !diaSemana.isBlank()) {
+            diaSemana = diaSemana.toUpperCase();
+            switch (diaSemana) {
+                case "MONDAY":
+                case "TUESDAY":
+                case "WEDNESDAY":
+                case "THURSDAY":
+                case "FRIDAY":
+                case "SATURDAY":
+                case "SUNDAY":
+                    dia = DayOfWeek.valueOf(diaSemana);
+                    break;
+                case "SEGUNDA":{
+                    dia = DayOfWeek.valueOf("MONDAY");
+                    break;
+                }
+                case "TERCA":{
+                    dia = DayOfWeek.valueOf("TUESDAY");
+                    break;
+                }
+                case "QUARTA":{
+                    dia = DayOfWeek.valueOf("WEDNESDAY");
+                    break;
+                }
+                case "QUINTA":{
+                    dia = DayOfWeek.valueOf("THURSDAY");
+                    break;
+                }
+                case "SEXTA":{
+                    dia = DayOfWeek.valueOf("FRIDAY");
+                    break;
+                }
+                case "SABADO":{
+                    dia = DayOfWeek.valueOf("SATURDAY");
+                    break;
+                }
+                case "DOMINGO": {
+                    dia = DayOfWeek.valueOf("SUNDAY");
+                    break;
+                }
+            }
+        }
+
+        LocalTime timeInit = null;
+        LocalTime timeEnd = null;
+        if (horaInicio != null && !horaInicio.isBlank()) {
+            timeInit = LocalTime.parse(horaInicio);
+        }
+        if (horaFim != null && !horaFim.isBlank()) {
+            timeEnd = LocalTime.parse(horaFim);
+        }
+
+        FilterObjectExplicador filterObjectExplicador = new FilterObjectExplicador(nomeCadeira, nomeIdioma, dia, timeInit, timeEnd);
 
         if (filterObjectExplicador.isEmpty()) {
             Set<ExplicadorDTO> explicadorTransfer = new HashSet<>();

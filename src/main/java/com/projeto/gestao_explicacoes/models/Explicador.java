@@ -63,7 +63,7 @@ public class Explicador extends BaseModel{
   }
 
   /**
-   * Verifica a existencia do @param horario na colecção
+   * Verifica a existencia do horario na colecção
    * @param horario
    * @return true se existir e false se não
    */
@@ -91,9 +91,9 @@ public class Explicador extends BaseModel{
   }
 
   /**
-   * Verifica a existencia do @param idioma na colecção
-   * @param idioma
-   * @return true se existir e false se não
+   * Verifica a existencia do {@code idioma} na colecção
+   * @param idioma idioma a verificar
+   * @return {@code true} se existir e {@code false} se não
    */
   public boolean containsIdioma(Idioma idioma) {
     for (Idioma auxIdioma: this.idiomas) {
@@ -117,7 +117,7 @@ public class Explicador extends BaseModel{
   }
 
   /**
-   * Verifica a existencia do @param atendimento na colecção
+   * Verifica a existencia do atendimento na colecção
    * @param atendimento
    * @return true se existir e false se não
    */
@@ -141,7 +141,7 @@ public class Explicador extends BaseModel{
   }
 
   /**
-   * Verifica a existencia do @param cadeira na colecção
+   * Verifica a existencia do cadeira na colecção
    * @param cadeira
    * @return true se existir e false se não
    */

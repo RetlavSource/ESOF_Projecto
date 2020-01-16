@@ -34,20 +34,12 @@ public class CadeiraController {
         return ResponseEntity.ok(this.cadeiraService.findAll());
     }
 
-    //Mandei objeto dentro de objeto pelo postman
-    /** Como mandar o pedido POST na aplicação Postman
+    /**
+     * Procura uma cadeira pelo seu curso
      *
-     * Sem acentos no payload
-     * no request POST do postman: localhost:8082/cadeira/1
-     {
-        "nome" : "Inteligencia Artificial",
-        "sigla": "IA",
-
-        "curso" : [
-
-            {"nome" : "Engenharia Informatica"}
-        ]
-     }
+     * @param cadeira
+     * @param nomeCurso nome do curso
+     * @return
      */
     @PostMapping(value = "/{curso}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cadeira> createCadeiraInCurso(@RequestBody Cadeira cadeira, @PathVariable("curso") String nomeCurso){

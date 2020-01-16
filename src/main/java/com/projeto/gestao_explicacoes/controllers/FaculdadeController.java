@@ -25,7 +25,6 @@ public class FaculdadeController {
 
     @Autowired
     public FaculdadeController(FaculdadeService faculdadeService) {
-
         this.faculdadeService = faculdadeService;
     }
 
@@ -52,13 +51,11 @@ public class FaculdadeController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Faculdade> createFaculdade(@RequestBody Faculdade faculdade){
-
         this.logger.info("Recebido um pedido POST");
 
         Optional<Faculdade> criadaFaculdade = this.faculdadeService.criarFaculdade(faculdade);
 
         if(criadaFaculdade.isPresent()){
-
             return ResponseEntity.ok(criadaFaculdade.get());
         }
 

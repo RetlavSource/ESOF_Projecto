@@ -34,19 +34,12 @@ public class CursoController {
         return ResponseEntity.ok(this.cursoService.findAll());
     }
 
-    //Mandei objeto dentro de objeto pelo postman
-    /** Como mandar o pedido POST na aplicação Postman
+    /**
+     * Procura um curso pelo nome da cadeira
      *
-     * Sem acentos no payload
-     * no request POST do postman: localhost:8082/curso/1
-     {
-        "nome" : "Engenharia Civil",
-
-        "faculdade" : [
-
-            {"nome" : "Ciencias e Tecnologia"}
-        ]
-     }
+     * @param curso
+     * @param nomeFaculdade name da faculdade
+     * @return
      */
     @PostMapping(value = "/{faculdade}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("faculdade") String nomeFaculdade){

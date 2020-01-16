@@ -44,7 +44,6 @@ public class AtendimentoController {
         if(criadoAtendimento.isPresent()){
             return ResponseEntity.ok(criadoAtendimento.get());
         }
-
         throw new FalhaCriarException("O atendimento entre o explicador " + objatendimento.getNomeExplicador() + " e o aluno " + objatendimento.getNomeAluno() + " na data " + objatendimento.getData() + " nao foi criado com sucesso!");
     }
 }

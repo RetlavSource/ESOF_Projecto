@@ -50,7 +50,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         logger.info("Startup");
 
-        //allTestes();
         //exemploEntradas();
         //testStringBuilder();
 
@@ -59,26 +58,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         //novosDadosWS12(); // server.port=8083
     }
 
-    private void allTestes() {
-
-        String str1 = "";
-        String str2 = " ";
-        String str3 = "_";
-        String str4 = null;
-        System.out.println("isEmpty -> str1:"+str1.isEmpty()+" -str2:"+str2.isEmpty()+" -str3:"+str3.isEmpty()+" -str4: test gives nullPointer");
-        System.out.println("isBlank -> str1:"+str1.isBlank()+" -str2:"+str2.isBlank()+" -str3:"+str3.isBlank()+" -str4: test gives nullPointer");
-        System.out.println(str1==null);
-        System.out.println(str2==null);
-        System.out.println(str3==null);
-        System.out.println(str4==null);
-
-
-    }
-
     private void exemploEntradas(){
         // Dados para introdução de Datas
 
-        LocalDateTime dateAndTime = null;
+        LocalDateTime dateAndTime;
         dateAndTime = LocalDateTime.parse("2018-11-11 23:23", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         System.out.println(dateAndTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));

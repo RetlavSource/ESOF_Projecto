@@ -25,11 +25,9 @@ public class AlunoController {
 
     @Autowired
     public AlunoController(AlunoService alunoService){
-
         this.alunoService = alunoService;
     }
 
-    //@RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<Aluno>> getAllAlunos(){
         this.logger.info("Recebido um pedido GET");
@@ -42,10 +40,11 @@ public class AlunoController {
         this.logger.info("Recebido um pedido GET");
 
         Optional<Aluno> optionalAluno = this.alunoService.findById(id);
+
         if (optionalAluno.isPresent()){
             return ResponseEntity.ok(optionalAluno.get());
         }
-        //return ResponseEntity.notFound().build();
+
         throw new FalhaPesquisaException("Aluno com o id: " + id + " inexistente!");
     }
 
@@ -56,13 +55,11 @@ public class AlunoController {
         Optional<Aluno> criadoAluno = this.alunoService.criarAluno(aluno);
 
         if(criadoAluno.isPresent()){
-
             return ResponseEntity.ok(criadoAluno.get());
         }
 
         throw new FalhaCriarException("O aluno com o nome: " + aluno.getNome() + " ja existe!");
     }
-
 
 }
 
