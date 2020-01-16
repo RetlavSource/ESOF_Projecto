@@ -150,13 +150,7 @@ public class ExplicadorServiceDB implements ExplicadorService {
 
         this.explicadorRepo.save(explicador);
 
-        return Optional.of(new ExplicadorDTO(
-                explicador.getNome(),
-                explicador.getNumero(),
-                explicador.getHorarios(),
-                explicador.getIdiomas(),
-                explicador.getAtendimentos(),
-                explicador.getCadeiras()));
+        return Optional.of(explicador.copyToExplicadorDTO());
     }
 
     @Override
