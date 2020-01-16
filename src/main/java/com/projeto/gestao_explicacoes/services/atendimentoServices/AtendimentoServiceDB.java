@@ -5,7 +5,7 @@ import com.projeto.gestao_explicacoes.models.builders.AtendimentoBuilder;
 import com.projeto.gestao_explicacoes.repositories.AlunoRepo;
 import com.projeto.gestao_explicacoes.repositories.AtendimentoRepo;
 import com.projeto.gestao_explicacoes.repositories.ExplicadorRepo;
-import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoDTO;
+import com.projeto.gestao_explicacoes.models.DTO.AtendimentoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

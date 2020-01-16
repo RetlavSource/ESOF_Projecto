@@ -4,7 +4,7 @@ import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.*;
 import com.projeto.gestao_explicacoes.models.builders.ExplicadorBuilder;
 import com.projeto.gestao_explicacoes.repositories.*;
-import com.projeto.gestao_explicacoes.services.explicadorServices.filters.ExplicadorDTO;
+import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 import com.projeto.gestao_explicacoes.services.explicadorServices.filters.FilterExplicadorService;
 import com.projeto.gestao_explicacoes.services.explicadorServices.filters.FilterObjectExplicador;
 import org.slf4j.Logger;

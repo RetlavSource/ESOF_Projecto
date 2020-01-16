@@ -3,7 +3,7 @@ package com.projeto.gestao_explicacoes.controllers;
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.Atendimento;
 import com.projeto.gestao_explicacoes.services.atendimentoServices.AtendimentoService;
-import com.projeto.gestao_explicacoes.services.atendimentoServices.filters.AtendimentoDTO;
+import com.projeto.gestao_explicacoes.models.DTO.AtendimentoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.projeto.gestao_explicacoes.services.explicadorServices.filters;
+package com.projeto.gestao_explicacoes.models.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projeto.gestao_explicacoes.models.Atendimento;

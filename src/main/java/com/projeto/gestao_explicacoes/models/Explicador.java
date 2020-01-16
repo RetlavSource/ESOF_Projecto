@@ -1,7 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projeto.gestao_explicacoes.services.explicadorServices.filters.ExplicadorDTO;
+import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

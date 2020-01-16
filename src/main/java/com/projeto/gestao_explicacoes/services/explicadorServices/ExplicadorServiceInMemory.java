@@ -1,7 +1,7 @@
 package com.projeto.gestao_explicacoes.services.explicadorServices;
 
 import com.projeto.gestao_explicacoes.models.Explicador;
-import com.projeto.gestao_explicacoes.services.explicadorServices.filters.ExplicadorDTO;
+import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
