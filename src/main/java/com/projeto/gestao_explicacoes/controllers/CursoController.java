@@ -39,7 +39,7 @@ public class CursoController {
      *
      * @param curso
      * @param nomeFaculdade name da faculdade
-     * @return
+     * @return curso
      */
     @PostMapping(value = "/{faculdade}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Curso> createCursoInFaculdade(@RequestBody Curso curso, @PathVariable("faculdade") String nomeFaculdade){
