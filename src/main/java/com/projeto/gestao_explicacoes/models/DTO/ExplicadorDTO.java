@@ -34,8 +34,14 @@ public class ExplicadorDTO {
     public ExplicadorDTO(String nome, Integer numero, Set<Horario> horarios, Set<Idioma> idiomas, Set<Cadeira> cadeiras) {
         this.nome = nome;
         this.numero = numero;
-        this.horarios = horarios;
-        this.idiomas = idiomas;
-        this.cadeiras = cadeiras;
+        if (!horarios.isEmpty()) {
+            this.horarios = horarios;
+        }
+        if (!idiomas.isEmpty()) {
+            this.idiomas = idiomas;
+        }
+        if (!cadeiras.isEmpty()) {
+            this.cadeiras = cadeiras;
+        }
     }
 }
