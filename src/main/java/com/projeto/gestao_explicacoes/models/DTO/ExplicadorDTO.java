@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,14 +21,10 @@ public class ExplicadorDTO {
 
     private String nome;
     private Integer numero;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Horario> horarios = new HashSet<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Idioma> idiomas = new HashSet<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Atendimento> atendimentos = new HashSet<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Cadeira> cadeiras = new HashSet<>();
+    private Set<Horario> horarios;
+    private Set<Idioma> idiomas;
+    private Set<Atendimento> atendimentos;
+    private Set<Cadeira> cadeiras;
 
     public ExplicadorDTO(String nome, Integer numero) {
         this.nome = nome;
