@@ -53,7 +53,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         //exemploEntradas();
         //testStringBuilder();
 
-        novosDados();     // server.port=8081
+        novosDados();     // server.port=8081   -- dados sem usar os builders
+        //novosDados2();     // server.port=8081  -- dados usando os builders
         //novosDadosWS11();   // server.port=8082
         //novosDadosWS12(); // server.port=8083
     }
@@ -176,11 +177,194 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         Aluno jose = new Aluno("Jose Manuel", 25344);
         fisioterapia.addAluno(jose);
 
+
         Idioma portugues = new Idioma("Portugues", "PT");
         Idioma portuguesBr = new Idioma("Portugues-BR", "PT-BR");
         Idioma espanhol = new Idioma("Espanhol", "ES");
         Idioma inglesUk = new Idioma("Ingles-UK", "EN-UK");
         Idioma coreano = new Idioma("Coreano", "KOR");
+
+
+        Explicador alessandro = new Explicador("Alessandro Moreira", 21064);
+        alessandro.addCadeira(so);
+        alessandro.addCadeira(esof);
+        alessandro.addCadeira(lp2);
+        alessandro.addIdioma(portuguesBr);
+        alessandro.addIdioma(portugues);
+        alessandro.addIdioma(inglesUk);
+        alessandro.addHorario(new Horario(DayOfWeek.MONDAY,
+                LocalTime.of(11, 0),
+                LocalTime.of(12, 0)));
+        alessandro.addHorario(new Horario(DayOfWeek.MONDAY,
+                LocalTime.of(13, 0),
+                LocalTime.of(17, 0)));
+        alessandro.addHorario(new Horario(DayOfWeek.WEDNESDAY,
+                LocalTime.of(9, 0),
+                LocalTime.of(12, 0)));
+        alessandro.addHorario(new Horario(DayOfWeek.FRIDAY,
+                LocalTime.of(10, 0),
+                LocalTime.of(16, 0)));
+
+        Explicador feliz = new Explicador("Feliz Gouveia", 11211);
+        feliz.addCadeira(esof);
+        feliz.addIdioma(portugues);
+        feliz.addIdioma(inglesUk);
+        feliz.addHorario(new Horario(DayOfWeek.WEDNESDAY,
+                LocalTime.of(17, 0),
+                LocalTime.of(20, 0)));
+        feliz.addHorario(new Horario(DayOfWeek.TUESDAY,
+                LocalTime.of(13, 0),
+                LocalTime.of(15, 0)));
+
+        Explicador jobs = new Explicador("Steve Jobs", 1333);
+        jobs.addCadeira(lp1);
+        jobs.addCadeira(lp2);
+        jobs.addIdioma(inglesUk);
+        jobs.addHorario(new Horario(DayOfWeek.THURSDAY,
+                LocalTime.of(8, 0),
+                LocalTime.of(11, 0)));
+
+        Explicador bill = new Explicador("Bill Gates", 10567);
+        bill.addCadeira(alg1);
+        bill.addCadeira(alg2);
+        bill.addIdioma(inglesUk);
+        bill.addHorario(new Horario(DayOfWeek.FRIDAY,
+                LocalTime.of(12, 0),
+                LocalTime.of(14, 0)));
+
+        Explicador edgar = new Explicador("Edgar Cardoso", 11767);
+        edgar.addCadeira(resistencia);
+        edgar.addCadeira(materiais);
+        edgar.addIdioma(portugues);
+        edgar.addIdioma(inglesUk);
+        edgar.addIdioma(espanhol);
+
+        Explicador freud = new Explicador("Sigmund Freud", 456);
+        freud.addCadeira(neuro);
+        freud.addCadeira(psocial);
+        freud.addIdioma(inglesUk);
+
+        Explicador kim = new Explicador("Kim Jang", 12909);
+        kim.addCadeira(motricidade);
+        kim.addCadeira(fisiologia);
+        kim.addIdioma(inglesUk);
+        kim.addIdioma(coreano);
+
+        Atendimento valAtendimento = new Atendimento(LocalDateTime.parse("2019-12-30T13:00"), alessandro, valter, esof, portugues);
+        alessandro.addAtendimento(valAtendimento);
+        valter.addAtendimento(valAtendimento);
+        esof.addAtendimento(valAtendimento);
+        portugues.addAtendimento(valAtendimento);
+
+        Atendimento gustAtendimento = new Atendimento(LocalDateTime.parse("2020-01-01T11:00"), alessandro, gustavo, so, portuguesBr);
+        alessandro.addAtendimento(gustAtendimento);
+        gustavo.addAtendimento(gustAtendimento);
+        so.addAtendimento(gustAtendimento);
+        portuguesBr.addAtendimento(gustAtendimento);
+
+
+        this.faculdadeRepo.save(faculdade1);
+        this.faculdadeRepo.save(faculdade2);
+        this.faculdadeRepo.save(faculdade3);
+
+        System.out.println(this.faculdadeRepo.count() + " " + this.faculdadeRepo.findAll());
+        System.out.println(this.cursoRepo.count() + " " + this.cursoRepo.findAll());
+        System.out.println(this.cadeiraRepo.count() + " " + this.cadeiraRepo.findAll());
+        System.out.println(this.alunoRepo.count() + " " + this.alunoRepo.findAll());
+        System.out.println(this.explicadorRepo.count() + " " + this.explicadorRepo.findAll());
+        System.out.println(this.idiomaRepo.count() + " " + this.idiomaRepo.findAll());
+        System.out.println(this.horarioRepo.count() + " " + this.horarioRepo.findAll());
+        System.out.println(this.atendimentoRepo.count() + " " + this.atendimentoRepo.findAll());
+
+    }
+
+    private void novosDados2(){
+
+        Faculdade faculdade1 = new Faculdade("Ciencias e Tecnologia");
+        Faculdade faculdade2 = new Faculdade("Ciencias Humanas e Sociais");
+        Faculdade faculdade3 = new Faculdade("Ciencias da Saude");
+
+
+        Curso engInformatica = new Curso("Engenharia Informatica");
+        faculdade1.addCurso(engInformatica);
+
+        Curso engCivil = new Curso("Engenharia Civil");
+        faculdade1.addCurso(engCivil);
+
+        Curso psicologia = new Curso("Psicologia");
+        faculdade2.addCurso(psicologia);
+
+        Curso fisioterapia = new Curso("Fisioterapia");
+        faculdade3.addCurso(fisioterapia);
+
+
+        Cadeira alg1 = new Cadeira("Algoritmos e estruturas de Dados I", "ALG1");
+        engInformatica.addCadeira(alg1);
+
+        Cadeira alg2 = new Cadeira("Algoritmos e estruturas de Dados II", "ALG2");
+        engInformatica.addCadeira(alg2);
+
+        Cadeira lp1 = new Cadeira("Linguagens de Programacao I", "LP1");
+        engInformatica.addCadeira(lp1);
+
+        Cadeira lp2 = new Cadeira("Linguagens de Programacao II", "LP2");
+        engInformatica.addCadeira(lp2);
+
+        Cadeira so = new Cadeira("Sistemas Operativos", "SO");
+        engInformatica.addCadeira(so);
+
+        Cadeira esof = new Cadeira("Engenharia de Software", "ESOF");
+        engInformatica.addCadeira(esof);
+
+        Cadeira fisica = new Cadeira("Fisica", "FIS");
+        engCivil.addCadeira(fisica);
+
+        Cadeira materiais = new Cadeira("Materiais de Construcao", "MAT");
+        engCivil.addCadeira(materiais);
+
+        Cadeira resistencia = new Cadeira("Resistencia de Materiais", "RES");
+        engCivil.addCadeira(resistencia);
+
+        Cadeira psocial = new Cadeira("Psicologia Social", "PSO");
+        psicologia.addCadeira(psocial);
+
+        Cadeira neuro = new Cadeira("Neuropsicologia", "NPS");
+        psicologia.addCadeira(neuro);
+
+        Cadeira juridica = new Cadeira("Psicologia Juridica", "PSJ");
+        psicologia.addCadeira(juridica);
+
+        Cadeira fisiologia = new Cadeira("Anatomofisiologia", "AFI");
+        fisioterapia.addCadeira(fisiologia);
+
+        Cadeira bioquimica = new Cadeira("Bioquimica Fisiologica", "BFI");
+        fisioterapia.addCadeira(bioquimica);
+
+        Cadeira motricidade = new Cadeira("Motricidade Humana", "MHU");
+        fisioterapia.addCadeira(motricidade);
+
+        Aluno valter = new Aluno("Valter Cardoso", 31062);
+        engInformatica.addAluno(valter);
+
+        Aluno gustavo = new Aluno("Gustavo Teixeira", 21736);
+        engInformatica.addAluno(gustavo);
+
+        Aluno manuel = new Aluno("Manuel Antonio", 13975);
+        engCivil.addAluno(manuel);
+
+        Aluno maria = new Aluno("Maria Aparecida", 33971);
+        psicologia.addAluno(maria);
+
+        Aluno jose = new Aluno("Jose Manuel", 25344);
+        fisioterapia.addAluno(jose);
+
+
+        Idioma portugues = new Idioma("Portugues", "PT");
+        Idioma portuguesBr = new Idioma("Portugues-BR", "PT-BR");
+        Idioma espanhol = new Idioma("Espanhol", "ES");
+        Idioma inglesUk = new Idioma("Ingles-UK", "EN-UK");
+        Idioma coreano = new Idioma("Coreano", "KOR");
+
 
         Explicador alessandro = new ExplicadorBuilder().setNome("Alessandro Moreira").setNumero(21064)
                 .addCadeira(so)
@@ -202,8 +386,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                         LocalTime.of(10, 0),
                         LocalTime.of(16, 0)))
                 .build();
-
-
 
         Explicador feliz = new ExplicadorBuilder().setNome("Feliz Gouveia").setNumero(11211)
                 .addCadeira(esof)
