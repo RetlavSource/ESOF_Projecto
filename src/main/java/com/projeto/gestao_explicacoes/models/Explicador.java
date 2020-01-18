@@ -158,6 +158,7 @@ public class Explicador extends BaseModel{
 
   /**
    * Permite copiar um objeto Explicador para um objeto ExplicadorDTO
+   *
    * @return o objeto ExplicadorDTO criado
    */
   public ExplicadorDTO copyToExplicadorDTO() {

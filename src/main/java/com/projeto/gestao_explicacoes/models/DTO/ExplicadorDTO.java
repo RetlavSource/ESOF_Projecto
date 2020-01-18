@@ -16,32 +16,35 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ExplicadorDTO {
 
     private String nome;
     private Integer numero;
-    private Set<Horario> horarios;
-    private Set<Idioma> idiomas;
-    private Set<Atendimento> atendimentos;
-    private Set<Cadeira> cadeiras;
+    private Set<Horario> horarios = new HashSet<>();
+    private Set<Idioma> idiomas = new HashSet<>();
+    private Set<Atendimento> atendimentos = new HashSet<>();
+    private Set<Cadeira> cadeiras = new HashSet<>();
 
     public ExplicadorDTO(String nome, Integer numero) {
         this.nome = nome;
         this.numero = numero;
     }
 
+    /**
+     * Recebe parâmetros do {@code Explicador} para converter em ExplicadorDTO
+     *
+     * @param nome
+     * @param numero
+     * @param horarios parâmetro igual/mesmo tipo que o {@code Explicador}
+     * @param idiomas parâmetro igual/mesmo tipo que o {@code Explicador}
+     * @param cadeiras parâmetro igual/mesmo tipo que o {@code Explicador}
+     */
     public ExplicadorDTO(String nome, Integer numero, Set<Horario> horarios, Set<Idioma> idiomas, Set<Cadeira> cadeiras) {
         this.nome = nome;
         this.numero = numero;
-        if (!horarios.isEmpty()) {
-            this.horarios = horarios;
-        }
-        if (!idiomas.isEmpty()) {
-            this.idiomas = idiomas;
-        }
-        if (!cadeiras.isEmpty()) {
-            this.cadeiras = cadeiras;
-        }
+        this.horarios = horarios;
+        this.idiomas = idiomas;
+        this.cadeiras = cadeiras;
     }
 }
