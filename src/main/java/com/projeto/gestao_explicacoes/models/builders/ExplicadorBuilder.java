@@ -41,7 +41,7 @@ public class ExplicadorBuilder {
     }
 
     public ExplicadorBuilder addIdioma(Idioma idioma) {
-        this.idiomas.add(new Idioma(idioma.getNome(), idioma.getSigla()));
+        this.idiomas.add(idioma);
         return this;
     }
 
@@ -67,8 +67,6 @@ public class ExplicadorBuilder {
 
     public Explicador build() throws FalhaCriarException{
 
-        Explicador explicador = new Explicador(nome, numero, horarios, idiomas, atendimentos, cadeiras);
-
         if( this.nome == null || this.nome.isBlank() ){
             throw new FalhaCriarException("Argumento nome inválido ou inexistente!!");
         }
@@ -77,25 +75,27 @@ public class ExplicadorBuilder {
             throw new FalhaCriarException("Argumento numero inválido ou inexistente!!");
         }
 
-        if ( !horarios.isEmpty() ) {
+        Explicador explicador = new Explicador(nome, numero, horarios, idiomas, atendimentos, cadeiras);
+
+        if ( !this.horarios.isEmpty() ) {
             for (Horario horario: this.horarios) {
                 horario.setExplicador(explicador);
             }
         }
 
-        if ( !idiomas.isEmpty() ) {
+        if ( !this.idiomas.isEmpty() ) {
             for (Idioma idioma: this.idiomas) {
                 idioma.getExplicadores().add(explicador);
             }
         }
 
-        if ( !atendimentos.isEmpty() ) {
+        if ( !this.atendimentos.isEmpty() ) {
             for (Atendimento atendimento : this.atendimentos) {
                 atendimento.setExplicador(explicador);
             }
         }
 
-        if ( !cadeiras.isEmpty() ) {
+        if ( !this.cadeiras.isEmpty() ) {
             for (Cadeira cadeira: this.cadeiras) {
                 cadeira.getExplicadores().add(explicador);
             }
