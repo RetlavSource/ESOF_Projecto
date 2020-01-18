@@ -35,16 +35,17 @@ public class AtendimentoBuilder {
     }
 
     public AtendimentoBuilder setIdioma(Idioma idioma) {
-        this.idioma = new Idioma(idioma.getNome(), idioma.getSigla());
+        this.idioma = idioma;
         return this;
     }
 
     public Atendimento build() throws FalhaCriarException {
-        Atendimento atendimento = new Atendimento(data);
 
         if ( data == null ) {
             throw new FalhaCriarException("Argumento data inválido ou inexistente!!");
         }
+
+        Atendimento atendimento = new Atendimento(data);
 
         if ( this.explicador != null ) {
             this.explicador.addAtendimento(atendimento);
