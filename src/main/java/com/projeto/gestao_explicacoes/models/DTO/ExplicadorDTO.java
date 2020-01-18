@@ -1,4 +1,4 @@
-package com.projeto.gestao_explicacoes.services.explicadorServices.filters;
+package com.projeto.gestao_explicacoes.models.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.projeto.gestao_explicacoes.models.Atendimento;
@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,14 +21,10 @@ public class ExplicadorDTO {
 
     private String nome;
     private Integer numero;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Horario> horarios = new HashSet<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Idioma> idiomas = new HashSet<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Atendimento> atendimentos = new HashSet<>();
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Set<Cadeira> cadeiras = new HashSet<>();
+    private Set<Horario> horarios;
+    private Set<Idioma> idiomas;
+    private Set<Atendimento> atendimentos;
+    private Set<Cadeira> cadeiras;
 
     public ExplicadorDTO(String nome, Integer numero) {
         this.nome = nome;
@@ -37,8 +34,14 @@ public class ExplicadorDTO {
     public ExplicadorDTO(String nome, Integer numero, Set<Horario> horarios, Set<Idioma> idiomas, Set<Cadeira> cadeiras) {
         this.nome = nome;
         this.numero = numero;
-        this.horarios = horarios;
-        this.idiomas = idiomas;
-        this.cadeiras = cadeiras;
+        if (!horarios.isEmpty()) {
+            this.horarios = horarios;
+        }
+        if (!idiomas.isEmpty()) {
+            this.idiomas = idiomas;
+        }
+        if (!cadeiras.isEmpty()) {
+            this.cadeiras = cadeiras;
+        }
     }
 }

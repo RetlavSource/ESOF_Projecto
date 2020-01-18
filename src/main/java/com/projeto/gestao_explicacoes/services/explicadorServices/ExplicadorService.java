@@ -1,9 +1,9 @@
 package com.projeto.gestao_explicacoes.services.explicadorServices;
 
 import com.projeto.gestao_explicacoes.models.Explicador;
-import com.projeto.gestao_explicacoes.services.explicadorServices.filters.ExplicadorDTO;
-import com.projeto.gestao_explicacoes.services.explicadorServices.filters.FilterObjectExplicador;
+import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,5 +17,5 @@ public interface ExplicadorService {
 
     Optional<ExplicadorDTO> modificaExplicador(ExplicadorDTO infoExplicador);
 
-    Set<ExplicadorDTO> procuraExplicadores(FilterObjectExplicador filterObjectExplicador);
+    Set<ExplicadorDTO> procuraExplicadores(Map<String, String> parametros);
 }
