@@ -46,16 +46,16 @@ public class ExplicadorController {
     }
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Explicador> createExplicador(@RequestBody Explicador explicador){
+    public ResponseEntity<ExplicadorDTO> createExplicador(@RequestBody ExplicadorDTO explicadorDTO){
         this.logger.info("Recebido um pedido POST em createExplicador()");
 
-        Optional<Explicador> criadoExplicador = this.explicadorService.criarExplicador(explicador);
+        Optional<ExplicadorDTO> criadoExplicadorDTO = this.explicadorService.criarExplicador(explicadorDTO);
 
-        if(criadoExplicador.isPresent()){
-            return ResponseEntity.ok(criadoExplicador.get());
+        if(criadoExplicadorDTO.isPresent()){
+            return ResponseEntity.ok(criadoExplicadorDTO.get());
         }
 
-        throw new FalhaCriarException("O explicador com o nome: " + explicador.getNome() + " ja existe!");
+        throw new FalhaCriarException("O explicador com o nome: " + explicadorDTO.getNome() + " ja existe!");
     }
 
     @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -11,7 +11,7 @@ public interface ExplicadorService {
 
     Set<Explicador> findAll();
 
-    Optional<Explicador> criarExplicador(Explicador explicador);
+    Optional<ExplicadorDTO> criarExplicador(ExplicadorDTO explicador);
 
     Optional<ExplicadorDTO> findByNome(String nomeExplicador);
 

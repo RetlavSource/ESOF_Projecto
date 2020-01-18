@@ -18,7 +18,7 @@ public class ExplicadorServiceInMemory implements ExplicadorService {
     }
 
     @Override
-    public Optional<Explicador> criarExplicador(Explicador explicador) {
+    public Optional<ExplicadorDTO> criarExplicador(ExplicadorDTO explicadorDTO) {
         return Optional.empty();
     }
 

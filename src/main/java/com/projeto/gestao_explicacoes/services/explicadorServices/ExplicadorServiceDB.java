@@ -50,15 +50,27 @@ public class ExplicadorServiceDB implements ExplicadorService {
     }
 
     @Override
-    public Optional<Explicador> criarExplicador(Explicador explicador) {
+    public Optional<ExplicadorDTO> criarExplicador(ExplicadorDTO explicadorDTO) {
+        this.logger.info("No método: ExplicadorServiceDB -> criarExplicador");
 
-        if(this.explicadorRepo.findByNumero(explicador.getNumero()).isPresent()){
+        if(this.explicadorRepo.findByNumero(explicadorDTO.getNumero()).isPresent()){
             return Optional.empty();
         }
 
-        Explicador explicadorCriado = this.explicadorRepo.save(explicador);
+        Explicador novoExplicador = new ExplicadorBuilder()
+                .setNome(explicadorDTO.getNome())
+                .setNumero(explicadorDTO.getNumero())
+                .setHorario(explicadorDTO.getHorarios())
+                .setIdiomas(explicadorDTO.getIdiomas())
+                .setAtendimentos(explicadorDTO.getAtendimentos())
+                .setCadeiras(explicadorDTO.getCadeiras())
+                .build();
 
-        return Optional.of(explicadorCriado);
+        this.explicadorRepo.save(novoExplicador);
+
+        ExplicadorDTO auxExplicadorDTO = novoExplicador.copyToExplicadorDTO();
+        auxExplicadorDTO.allSetToDTO();
+        return Optional.of(auxExplicadorDTO);
     }
 
     @Override
@@ -83,22 +95,18 @@ public class ExplicadorServiceDB implements ExplicadorService {
             return Optional.empty();
         }
 
+        if (infoExplicador.getNome().isBlank()) {
+            this.logger.info("Explicador sem Nome válido!");
+            return Optional.empty();
+        }
+
         Optional<Explicador> optExplicador = this.explicadorRepo.findByNumero(infoExplicador.getNumero());
 
         // Não existindo o explicador, ele é criado
         if (optExplicador.isEmpty()) {
             this.logger.info("A criar novo explicador!");
 
-            Explicador novoExplicador = new ExplicadorBuilder()
-                    .setNome(infoExplicador.getNome())
-                    .setNumero(infoExplicador.getNumero())
-                    .setHorario(infoExplicador.getHorarios())
-                    .setIdiomas(infoExplicador.getIdiomas())
-                    .setAtendimentos(infoExplicador.getAtendimentos())
-                    .setCadeiras(infoExplicador.getCadeiras())
-                    .build();
-            this.explicadorRepo.save(novoExplicador);
-            return Optional.of(novoExplicador.copyToExplicadorDTO());
+            return this.criarExplicador(infoExplicador);
         }
 
         this.logger.info("Atualizar explicador existente!");
@@ -150,7 +158,9 @@ public class ExplicadorServiceDB implements ExplicadorService {
 
         this.explicadorRepo.save(explicador);
 
-        return Optional.of(explicador.copyToExplicadorDTO());
+        ExplicadorDTO explicadorDTO = explicador.copyToExplicadorDTO();
+        explicadorDTO.allSetToDTO();
+        return Optional.of(explicadorDTO);
     }
 
     @Override

@@ -19,9 +19,9 @@ public class AtendimentoDTO {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime data;
     private String nomeExplicador;
-    private String numeroExplicador;
+    private Integer numeroExplicador;
     private String nomeAluno;
-    private String numeroAluno;
+    private Integer numeroAluno;
     private String nomeCadeira;
     private String siglaCadeira;
     private String nomeIdioma;
