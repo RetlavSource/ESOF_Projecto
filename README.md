@@ -6,27 +6,31 @@ Este é um projeto prático para a disciplina de  ***Engenharia de Software*** n
 
 ## Endpoints utilizados
 *   **GET**
-    *   /cadeira -- *`lista todas as cadeiras`*
-    *   /cadeira/1 -- *`lista a cadeira com o id=1`*
+    *   /aluno -- *`lista todos os alunos`*
+    *   /aluno/{id} -- *`lista o aluno com o referido id passado por url`*
     *   /atendimento -- *`lista todos os atendimentos`*
-    *   /atendimento/1 -- *`lista o atendimento com o id=1`*
+    *   /cadeira -- *`lista todas as cadeiras`*
     *   /curso -- *`lista todos os cursos`*
-    *   /curso/1 -- *`lista o curso com o id=1`*
+    *   /explicador -- *`lista todos os cursos ou procura-os por diversos parâmetros (dia, cadeira, idioma, inicio e fim)`*
+    *   /explicador/{nome} -- *`lista o explicador com o referido nome passado por url`*
+    *   /faculdade -- *`lista todas as faculdades`*
+    *   /faculdade/{id} -- *`lista a faculdade com o referido id passado por url`*
+    *   /horario -- *`lista todos os horarios`*
+    *   /idioma -- *`lista todos os idiomas`*
 
 *   **POST**
-    *   /cadeira -- *`cria uma cadeira`*
-    *   /cadeira/{curso} -- *`cria uma cadeira no curso com o id={curso} ou nome={curso}`*
+    *   /aluno -- *`cria um aluno`*
     *   /atendimento -- *`cria um atendimento`*
-    *   /curso/{faculdade} -- *`cria um curso na faculdade com id={faculdade} ou nome={faculdade}`*
+    *   /cadeira/{curso} -- *`cria uma cadeira no curso com o nome do curso passado por url`*
+    *   /curso/{faculdade} -- *`cria um curso na faculdade com o nome da faculdade passado por url`*
+    *   /explicador -- *`cria um explicador`*
+    *   /faculdade -- *`cria uma faculdade`*
 
 *   **PUT**
-    *   /cadeira/1 -- *`modifica a cadeira com o id=1`*
-    *   /atendimento/1 -- *`modifica o atendimento com o id=1`*
-    *   /curso/1 -- *`modifica o curso com o id=1`*
+    *   /explicador -- *`modifica o explicador passado no payload`*
+    *   /explicador/{cadeira} -- *`associa uma cadeira (nome no url) a um explicador (passado no payload)`*
     
 *   **DELETE**
-    *   /cadeira/1 -- *`remove a cadeira com o id=1`*
-    *   /atendimento/1 -- *`remove o atendimento com o id=1`*
     *   /curso/1 -- *`remove o curso com o id=1`*
 
 ## Documentação de referência

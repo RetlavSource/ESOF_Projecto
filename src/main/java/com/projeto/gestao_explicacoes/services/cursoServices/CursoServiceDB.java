@@ -38,7 +38,14 @@ public class CursoServiceDB implements CursoService {
         return cursos;
     }
 
-    //Curso tem que estar obrigatoriamente associada a uma faculdade na sua criacao
+    /**
+     * Cria um curso numa faculdade existente.
+     * Curso tem que estar obrigatoriamente associado a uma faculdade na sua criação
+     *
+     * @param curso objeto curso
+     * @param nomeFaculdade nome da faculdade
+     * @return curso criado
+     */
     @Override
     public Optional<Curso> criarCursoFaculdade(Curso curso, String nomeFaculdade) {
         this.logger.info("No método: CursoServiceDB -> criarCursoFaculdade");
