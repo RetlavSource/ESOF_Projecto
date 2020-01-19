@@ -36,4 +36,9 @@ public class ExplicadorServiceInMemory implements ExplicadorService {
     public Set<ExplicadorDTO> procuraExplicadores(Map<String, String> parametros) {
         return null;
     }
+
+    @Override
+    public Optional<ExplicadorDTO> adicionaCadeiraAoExplicador(ExplicadorDTO infoExplicador, String nomeCadeira) {
+        return Optional.empty();
+    }
 }

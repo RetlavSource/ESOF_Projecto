@@ -17,5 +17,7 @@ public interface ExplicadorService {
 
     Optional<ExplicadorDTO> modificaExplicador(ExplicadorDTO infoExplicador);
 
+    Optional<ExplicadorDTO> adicionaCadeiraAoExplicador(ExplicadorDTO infoExplicador, String nomeCadeira);
+
     Set<ExplicadorDTO> procuraExplicadores(Map<String, String> parametros);
 }

@@ -35,11 +35,11 @@ public class CadeiraController {
     }
 
     /**
-     * Procura uma cadeira pelo seu curso
+     * Cria uma {@code cadeira} num {@code curso}
      *
-     * @param cadeira
-     * @param nomeCurso nome do curso
-     * @return
+     * @param cadeira {@code cadeira} passado por POST, no payload
+     * @param nomeCurso nome do curso passado no url
+     * @return {@code cadeira} criada
      */
     @PostMapping(value = "/{curso}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cadeira> createCadeiraInCurso(@RequestBody Cadeira cadeira, @PathVariable("curso") String nomeCurso){

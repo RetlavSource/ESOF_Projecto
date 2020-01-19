@@ -45,6 +45,12 @@ public class ExplicadorController {
         return ResponseEntity.ok(this.explicadorService.procuraExplicadores(parametros));
     }
 
+    /**
+     * Cria um explicador
+     *
+     * @param explicadorDTO explicador passado por POST, no payload
+     * @return explicador criado
+     */
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExplicadorDTO> createExplicador(@RequestBody ExplicadorDTO explicadorDTO){
         this.logger.info("Recebido um pedido POST em createExplicador()");
@@ -58,6 +64,12 @@ public class ExplicadorController {
         throw new FalhaCriarException("O explicador com o nome: " + explicadorDTO.getNome() + " ja existe!");
     }
 
+    /**
+     * Modifica um explicador. Se não existe, cria-o.
+     *
+     * @param infoExplicador explicador passado por POST, no payload
+     * @return explicador modificado
+     */
     @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExplicadorDTO> putExplicadorHorario(@RequestBody ExplicadorDTO infoExplicador) {
         this.logger.info("Recebido um pedido PUT em putExplicadorHorario()");
@@ -71,6 +83,32 @@ public class ExplicadorController {
         throw new FalhaCriarException("Falha ao modificar as disponibilidades do explicador!");
     }
 
+    /**
+     * Associa uma cadeira a um explicador, caso a cadeira exista (não cria cadeira caso não exista).
+     *
+     * @param infoExplicador explicador passado por POST, no payload
+     * @param nomeCadeira nome da cadeira passado no url
+     * @return explicador modificado
+     */
+    @PutMapping(value = "/{cadeira}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ExplicadorDTO> putExplicadorCadeira(@RequestBody ExplicadorDTO infoExplicador, @PathVariable("cadeira") String nomeCadeira) {
+        this.logger.info("Recebido um pedido PUT em putExplicadorCadeira()");
+
+        Optional<ExplicadorDTO> optExplicador = this.explicadorService.adicionaCadeiraAoExplicador(infoExplicador, nomeCadeira);
+
+        if (optExplicador.isPresent()) {
+            return ResponseEntity.ok(optExplicador.get());
+        }
+
+        throw new FalhaCriarException("Falha ao adicionar a cadeira: " + nomeCadeira + " ao explicador!");
+    }
+
+    /**
+     * Pesquisa um explicador pelo seu nome.
+     *
+     * @param nomeExplicador nome do explicador passado no url
+     * @return explicador encontrado
+     */
     @GetMapping(value = "/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ExplicadorDTO> getExplicadorByNome(@PathVariable("nome") String nomeExplicador) {
         this.logger.info("Recebido um pedido GET em getExplicadorByNome()");
