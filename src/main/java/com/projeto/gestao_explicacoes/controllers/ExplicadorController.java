@@ -1,7 +1,6 @@
 package com.projeto.gestao_explicacoes.controllers;
 
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
-import com.projeto.gestao_explicacoes.models.Explicador;
 import com.projeto.gestao_explicacoes.services.explicadorServices.ExplicadorService;
 import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 import org.slf4j.Logger;
