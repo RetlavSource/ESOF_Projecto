@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AtendimentoDTO {
 
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime data;
     private String nomeExplicador;
-    private String numeroExplicador;
+    private Integer numeroExplicador;
     private String nomeAluno;
-    private String numeroAluno;
+    private Integer numeroAluno;
     private String nomeCadeira;
     private String siglaCadeira;
     private String nomeIdioma;

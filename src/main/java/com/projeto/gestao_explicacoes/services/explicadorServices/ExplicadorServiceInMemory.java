@@ -18,7 +18,7 @@ public class ExplicadorServiceInMemory implements ExplicadorService {
     }
 
     @Override
-    public Optional<Explicador> criarExplicador(Explicador explicador) {
+    public Optional<ExplicadorDTO> criarExplicador(ExplicadorDTO explicadorDTO) {
         return Optional.empty();
     }
 
@@ -35,5 +35,10 @@ public class ExplicadorServiceInMemory implements ExplicadorService {
     @Override
     public Set<ExplicadorDTO> procuraExplicadores(Map<String, String> parametros) {
         return null;
+    }
+
+    @Override
+    public Optional<ExplicadorDTO> adicionaCadeiraAoExplicador(ExplicadorDTO infoExplicador, String nomeCadeira) {
+        return Optional.empty();
     }
 }

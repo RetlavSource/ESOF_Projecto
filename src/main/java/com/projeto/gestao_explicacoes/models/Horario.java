@@ -37,4 +37,21 @@ public class Horario extends BaseModel{
     this.horaFim = horaFim;
   }
 
+  /**
+   * Verifica se {@code horaInicio} é maior ou igual a {@code horaFim}
+   * Verifica também se existem minutos diferentes de 0 (zero)
+   *
+   * @return {@code true} se válido ou {@code false} se inválida
+   */
+  public boolean isHoraInicioAndHoraFimValid() {
+    if (this.horaInicio.getMinute() != 0 || this.horaFim.getMinute() != 0) {
+      return false;
+    }
+
+    if (this.horaInicio.getHour() >= this.horaFim.getHour()) {
+      return false;
+    }
+    return true;
+  }
+
 }

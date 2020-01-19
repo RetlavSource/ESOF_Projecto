@@ -2,7 +2,6 @@ package com.projeto.gestao_explicacoes.services.explicadorServices;
 
 import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.*;
-import com.projeto.gestao_explicacoes.models.builders.ExplicadorBuilder;
 import com.projeto.gestao_explicacoes.repositories.*;
 import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 import com.projeto.gestao_explicacoes.services.explicadorServices.filters.FilterExplicadorService;
@@ -49,18 +48,36 @@ public class ExplicadorServiceDB implements ExplicadorService {
         return explicadores;
     }
 
+    /**
+     * Cria um explicador.
+     *
+     * @param explicadorDTO recebido
+     * @return {@code Optional.of(explicadorDTO)} se criado ou {@code Optional.empty()} se não
+     */
     @Override
-    public Optional<Explicador> criarExplicador(Explicador explicador) {
+    public Optional<ExplicadorDTO> criarExplicador(ExplicadorDTO explicadorDTO) {
+        this.logger.info("No método: ExplicadorServiceDB -> criarExplicador");
 
-        if(this.explicadorRepo.findByNumero(explicador.getNumero()).isPresent()){
+        if (this.explicadorRepo.findByNumero(explicadorDTO.getNumero()).isPresent()){
             return Optional.empty();
         }
 
-        Explicador explicadorCriado = this.explicadorRepo.save(explicador);
+        Explicador explicador = new Explicador(explicadorDTO.getNome(), explicadorDTO.getNumero());
+        this.explicadorRepo.save(explicador);
 
-        return Optional.of(explicadorCriado);
+        this.adicionaHorariosIdiomasAtendimentosCadeiras(explicador, explicadorDTO);
+
+        ExplicadorDTO auxExplicadorDTO = explicador.copyToExplicadorDTO();
+        auxExplicadorDTO.allSetToDTO();
+        return Optional.of(auxExplicadorDTO);
     }
 
+    /**
+     * Pesquisa o explicador pelo nome.
+     *
+     * @param nomeExplicador nome do explicador
+     * @return {@code Optional.of(explicadorDTO)} se encontrado ou {@code Optional.empty()} se não
+     */
     @Override
     public Optional<ExplicadorDTO> findByNome(String nomeExplicador) {
 
@@ -73,6 +90,13 @@ public class ExplicadorServiceDB implements ExplicadorService {
         return Optional.of(new ExplicadorDTO(optExplicador.get().getNome(), optExplicador.get().getNumero()));
     }
 
+    /**
+     * Modifica os campos de um explicador.
+     * Se o explicador não existir, cria-o.
+     *
+     * @param infoExplicador recebido
+     * @return {@code Optional.of(explicadorDTO)} se modificado/criado ou {@code Optional.empty()} se não
+     */
     @Override
     public Optional<ExplicadorDTO> modificaExplicador(ExplicadorDTO infoExplicador) {
         this.logger.info("No método: ExplicadorServiceDB -> modificaExplicador");
@@ -83,22 +107,18 @@ public class ExplicadorServiceDB implements ExplicadorService {
             return Optional.empty();
         }
 
+        if (infoExplicador.getNome().isBlank()) {
+            this.logger.info("Explicador sem Nome válido!");
+            return Optional.empty();
+        }
+
         Optional<Explicador> optExplicador = this.explicadorRepo.findByNumero(infoExplicador.getNumero());
 
         // Não existindo o explicador, ele é criado
         if (optExplicador.isEmpty()) {
             this.logger.info("A criar novo explicador!");
 
-            Explicador novoExplicador = new ExplicadorBuilder()
-                    .setNome(infoExplicador.getNome())
-                    .setNumero(infoExplicador.getNumero())
-                    .setHorario(infoExplicador.getHorarios())
-                    .setIdiomas(infoExplicador.getIdiomas())
-                    .setAtendimentos(infoExplicador.getAtendimentos())
-                    .setCadeiras(infoExplicador.getCadeiras())
-                    .build();
-            this.explicadorRepo.save(novoExplicador);
-            return Optional.of(novoExplicador.copyToExplicadorDTO());
+            return this.criarExplicador(infoExplicador);
         }
 
         this.logger.info("Atualizar explicador existente!");
@@ -107,52 +127,19 @@ public class ExplicadorServiceDB implements ExplicadorService {
         explicador.setNome(infoExplicador.getNome());
         explicador.setNumero(infoExplicador.getNumero());
 
-        if ( !infoExplicador.getHorarios().isEmpty() ) {
-            for (Horario horario: infoExplicador.getHorarios()) {
-                if (explicador.containsHorario(horario)) {
-                    continue;
-                }
-                explicador.addHorario(horario);
-                this.horarioRepo.save(horario);
-            }
-        }
+        this.adicionaHorariosIdiomasAtendimentosCadeiras(explicador, infoExplicador);
 
-        if ( !infoExplicador.getIdiomas().isEmpty() ) {
-            for (Idioma idioma : infoExplicador.getIdiomas()) {
-                if (explicador.containsIdioma(idioma)) {
-                    continue;
-                }
-                Idioma auxIdioma = new Idioma(idioma.getNome(), idioma.getSigla());
-                explicador.addIdioma(auxIdioma);
-                this.idiomaRepo.save(auxIdioma);
-            }
-        }
-
-        if ( !infoExplicador.getAtendimentos().isEmpty() ) {
-            for (Atendimento atendimento: infoExplicador.getAtendimentos()) {
-                if (explicador.containsAtendimento(atendimento)) {
-                    continue;
-                }
-                explicador.addAtendimento(atendimento);
-                this.atendimentoRepo.save(atendimento);
-            }
-        }
-
-        if ( !infoExplicador.getCadeiras().isEmpty() ) {
-            for (Cadeira cadeira: infoExplicador.getCadeiras()) {
-                if (explicador.containsCadeira(cadeira)) {
-                    continue;
-                }
-                explicador.addCadeira(cadeira);
-                this.cadeiraRepo.save(cadeira);
-            }
-        }
-
-        this.explicadorRepo.save(explicador);
-
-        return Optional.of(explicador.copyToExplicadorDTO());
+        ExplicadorDTO explicadorDTO = explicador.copyToExplicadorDTO();
+        explicadorDTO.allSetToDTO();
+        return Optional.of(explicadorDTO);
     }
 
+    /**
+     * Procura um explicador por diversos parâmetros, utilizando filtros.
+     *
+     * @param parametros de pesquisa
+     * @return {@code Set<ExplicadorDTO>} com os explicadores encontrados
+     */
     @Override
     public Set<ExplicadorDTO> procuraExplicadores(Map<String, String> parametros) {
         this.logger.info("No método: ExplicadorServiceDB -> procuraExplicadores");
@@ -272,4 +259,118 @@ public class ExplicadorServiceDB implements ExplicadorService {
         return explicadorTransfer;
     }
 
+    /**
+     * Adiciona uma ou mais cadeiras ao explicador.
+     *
+     * @param infoExplicador explicador a adicionar a cadeira
+     * @param nomeCadeira nome da cadeira
+     * @return {@code Optional<ExplicadorDTO>} com o explicador
+     */
+    @Override
+    public Optional<ExplicadorDTO> adicionaCadeiraAoExplicador(ExplicadorDTO infoExplicador, String nomeCadeira) {
+        this.logger.info("No método: ExplicadorServiceDB -> adicionaCursoAoExplicador");
+
+        Optional<Explicador> optExplicador = this.explicadorRepo.findByNumero(infoExplicador.getNumero());
+
+        if (optExplicador.isPresent()) {
+            Optional<Cadeira> optCadeira = this.cadeiraRepo.findByNome(nomeCadeira);
+            if (optCadeira.isPresent()) {
+                optExplicador.get().addCadeira(optCadeira.get());
+                this.explicadorRepo.save(optExplicador.get());
+                ExplicadorDTO explicadorDTO = optExplicador.get().copyToExplicadorDTO();
+                explicadorDTO.allSetToDTO();
+                return Optional.of(explicadorDTO);
+            } else {
+                throw new FalhaCriarException("Não existe a cadeira com o nome indicado!!");
+            }
+        } else {
+            throw new FalhaCriarException("Não existe o explicador indicado!!");
+        }
+    }
+
+    /**
+     * Adiciona/Cria no explicador: {@code horarios}e {@code idiomas}.
+     * Adiciona ao explicador: {@code atendimentos} e {@code cadeiras}.
+     * Inserir {@code null} no parâmetro que não deseja utilizar.
+     * <i><b>Persiste</b></i> o explicador na base de dados.
+     *
+     * @param explicador previamente <i><b>persistido</b></i> na base de dados
+     * @param explicadorDTO utiliza os parâmetros {@code horarios}, {@code idiomas}, {@code atendimentos} e {@code cadeiras}
+     */
+    private void adicionaHorariosIdiomasAtendimentosCadeiras(Explicador explicador, ExplicadorDTO explicadorDTO) {
+        this.logger.info("No método: ExplicadorServiceDB -> adicionaHorariosIdiomasAtendimentosCadeiras");
+
+        if (explicadorDTO.getHorarios() != null) {
+            if ( !explicadorDTO.getHorarios().isEmpty() ) {
+                for (Horario horario: explicadorDTO.getHorarios()) {
+                    if (explicador.containsHorario(horario)) {
+                        continue;
+                    }
+                    if (!horario.isHoraInicioAndHoraFimValid()) {
+                        throw new FalhaCriarException("O horário introduzido não è válido!!");
+                    }
+                    explicador.addHorario(horario);
+                    this.horarioRepo.save(horario);
+                    this.logger.info("Adicionado Horário!");
+                }
+            }
+        }
+
+        if (explicadorDTO.getIdiomas() != null) {
+            if ( !explicadorDTO.getIdiomas().isEmpty() ) {
+                for (Idioma idioma : explicadorDTO.getIdiomas()) {
+                    if (explicador.containsIdioma(idioma)) {
+                        continue;
+                    }
+                    Optional <Idioma> idiomaCheck = this.idiomaRepo.findByNome(idioma.getNome().toUpperCase());
+                    if (idiomaCheck.isPresent()) {
+                        explicador.addIdioma(idiomaCheck.get());
+                        this.idiomaRepo.save(idiomaCheck.get());
+                        this.logger.info("Adicionado Idioma!");
+                    } else {
+                        Idioma auxIdioma = new Idioma(idioma.getNome(), idioma.getSigla());
+                        explicador.addIdioma(auxIdioma);
+                        this.idiomaRepo.save(auxIdioma);
+                        this.logger.info("Criado Idioma!");
+                    }
+                }
+            }
+        }
+
+        if (explicadorDTO.getAtendimentos() != null) {
+            if ( !explicadorDTO.getAtendimentos().isEmpty() ) {
+                for (Atendimento atendimento: explicadorDTO.getAtendimentos()) {
+                    if (explicador.containsAtendimento(atendimento)) {
+                        continue;
+                    }
+                    explicador.addAtendimento(atendimento);
+                    this.atendimentoRepo.save(atendimento);
+                    this.logger.info("Adicionado Atendimento!");
+                }
+            }
+        }
+
+        if (explicadorDTO.getCadeiras() != null) {
+            if ( !explicadorDTO.getCadeiras().isEmpty() ) {
+                for (Cadeira cadeira: explicadorDTO.getCadeiras()) {
+                    if (explicador.containsCadeira(cadeira)) {
+                        continue;
+                    }
+                    Optional<Cadeira> cadeiraCheck = this.cadeiraRepo.findByNome(cadeira.getNome());
+                    if (cadeiraCheck.isPresent()) {
+                        explicador.addCadeira(cadeiraCheck.get());
+                        this.cadeiraRepo.save(cadeiraCheck.get());
+                        this.logger.info("Adicionada Cadeira!");
+                    } else {
+                        throw new FalhaCriarException("Não existe a cadeira com o nome que indicou!!");
+                    }
+                }
+            }
+        }
+
+        this.logger.info("A salvar explicador!");
+
+        this.explicadorRepo.save(explicador);
+
+    }
 }

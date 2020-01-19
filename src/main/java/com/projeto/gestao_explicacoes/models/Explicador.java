@@ -1,6 +1,7 @@
 package com.projeto.gestao_explicacoes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projeto.gestao_explicacoes.exceptions.FalhaCriarException;
 import com.projeto.gestao_explicacoes.models.DTO.ExplicadorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -97,10 +98,14 @@ public class Explicador extends BaseModel{
    */
   public boolean containsIdioma(Idioma idioma) {
     for (Idioma auxIdioma: this.idiomas) {
-      if (auxIdioma.getNome().equals(idioma.getNome().toUpperCase())) {
-        if (auxIdioma.getSigla().equals(idioma.getSigla().toUpperCase())) {
-          return true;
+      if (idioma.getNome() != null && idioma.getSigla() != null) {
+        if (auxIdioma.getNome().equals(idioma.getNome().toUpperCase())) {
+          if (auxIdioma.getSigla().equals(idioma.getSigla().toUpperCase())) {
+            return true;
+          }
         }
+      } else {
+        throw new FalhaCriarException("Tem que introduzir um Nome e uma Sigla no Idioma!!");
       }
     }
     return false;
@@ -158,6 +163,7 @@ public class Explicador extends BaseModel{
 
   /**
    * Permite copiar um objeto Explicador para um objeto ExplicadorDTO
+   *
    * @return o objeto ExplicadorDTO criado
    */
   public ExplicadorDTO copyToExplicadorDTO() {
