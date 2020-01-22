@@ -224,6 +224,7 @@ public class ExplicadorServiceDB implements ExplicadorService {
         FilterObjectExplicador filterObjectExplicador = new FilterObjectExplicador(nomeCadeira, nomeIdioma, dia, timeInit, timeEnd);
 
         if (filterObjectExplicador.isEmpty()) {
+            this.logger.info("A devolver todos os explicadores!");
             Set<ExplicadorDTO> explicadorTransfer = new HashSet<>();
             for (Explicador explicador : this.findAll()) {
                 explicadorTransfer.add(explicador.copyToExplicadorDTO());
@@ -256,6 +257,7 @@ public class ExplicadorServiceDB implements ExplicadorService {
         for (Explicador explicador : this.filterExplicadorService.preFilter(todosExplicadores, filterObjectExplicador)) {
             explicadorTransfer.add(explicador.copyToExplicadorDTO());
         }
+        this.logger.info("A devolver o resultado da pesquisa!");
         return explicadorTransfer;
     }
 
