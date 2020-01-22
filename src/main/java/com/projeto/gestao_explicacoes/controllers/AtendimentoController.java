@@ -35,6 +35,12 @@ public class AtendimentoController {
         return ResponseEntity.ok(this.atendimentoService.findAll());
     }
 
+    /**
+     * Cria um atendimento.
+     *
+     * @param objatendimento dto que recebe os dados do atendimento
+     * @return dto com o atendimento
+     */
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AtendimentoDTO> createAtendimento(@RequestBody AtendimentoDTO objatendimento) {
         this.logger.info("Recebido um pedido POST");
