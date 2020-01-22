@@ -87,7 +87,10 @@ public class ExplicadorServiceDB implements ExplicadorService {
             return Optional.empty();
         }
 
-        return Optional.of(new ExplicadorDTO(optExplicador.get().getNome(), optExplicador.get().getNumero()));
+        ExplicadorDTO auxExplicador = optExplicador.get().copyToExplicadorDTO();
+        auxExplicador.allSetToDTO();
+
+        return Optional.of(auxExplicador);
     }
 
     /**
