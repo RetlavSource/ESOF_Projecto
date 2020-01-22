@@ -277,6 +277,7 @@ public class ExplicadorServiceDB implements ExplicadorService {
         if (optExplicador.isPresent()) {
             Optional<Cadeira> optCadeira = this.cadeiraRepo.findByNome(nomeCadeira);
             if (optCadeira.isPresent()) {
+                this.logger.info("A associar a cadeira ao explicador!");
                 optExplicador.get().addCadeira(optCadeira.get());
                 this.explicadorRepo.save(optExplicador.get());
                 ExplicadorDTO explicadorDTO = optExplicador.get().copyToExplicadorDTO();
